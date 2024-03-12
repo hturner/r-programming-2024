@@ -9,11 +9,11 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.551">
+  <meta name="generator" content="quarto-1.4.549">
 
-  <meta name="author" content="Heather Turner and Ella Kaye">
+  <meta name="author" content="Ella Kaye and Heather Turner">
   <meta name="author" content="Department of Statistics, University of Warwick">
-  <meta name="dcterms.date" content="2023-06-19">
+  <meta name="dcterms.date" content="2024-03-18">
   <title>R Programming - Efficient Programming</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -396,12 +396,12 @@
 
 <section id="title-slide" data-background-color="#552D62" class="quarto-title-block center">
   <h1 class="title">Efficient Programming</h1>
-  <p class="subtitle">Advanced R</p>
+  <p class="subtitle">R Programming</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Heather Turner and Ella Kaye 
+Ella Kaye and Heather Turner 
 </div>
 </div>
 <div class="quarto-title-author">
@@ -411,7 +411,7 @@ Department of Statistics, University of Warwick
 </div>
 </div>
 
-  <p class="date">June 19, 2023</p>
+  <p class="date">March 18, 2024</p>
 </section>
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
@@ -593,8 +593,8 @@ disabled.</code></pre>
 <pre><code># A tibble: 2 × 6
   expression             min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;        &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 grow(5000)          25.4ms     29ms      34.3    95.6MB    62.8 
-2 pre_specify(5000)   99.2µs    107µs    9104.     55.8KB     6.00</code></pre>
+1 grow(5000)          25.7ms     30ms      33.2    95.6MB    60.5 
+2 pre_specify(5000)  100.9µs    105µs    9130.     55.8KB     8.00</code></pre>
 </div>
 </div>
 <ul>
@@ -648,10 +648,10 @@ disabled.</code></pre>
 <pre><code># A tibble: 4 × 8
   expression                 n     k    min  median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;bch:&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 gl(n, k, length = 100…    10    10 3.16µs  3.69µs   242491.    12.4KB     24.3
-2 gl(n, k, length = 100…   100    10 9.31µs 10.09µs    95483.   11.05KB     19.1
-3 gl(n, k, length = 100…    10     1 2.79µs  3.24µs   299476.    3.95KB     30.0
-4 gl(n, k, length = 100…   100     1 6.44µs  7.05µs   134773.    7.53KB     13.5</code></pre>
+1 gl(n, k, length = 100…    10    10 3.08µs  3.65µs   246479.    12.4KB     24.7
+2 gl(n, k, length = 100…   100    10 9.47µs 10.41µs    93182.   11.05KB     18.6
+3 gl(n, k, length = 100…    10     1 2.75µs  3.16µs   302176.    3.95KB     30.2
+4 gl(n, k, length = 100…   100     1 6.36µs  7.05µs   135335.    7.53KB     13.5</code></pre>
 </div>
 </div>
 </div>
@@ -1009,7 +1009,7 @@ $y
 <span id="cb73-2"><a></a>sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>))</span>
 <span id="cb73-3"><a></a><span class="fu">rnorm</span>(<span class="dv">2</span>, mu[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)], sd[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.127164 3.578396</code></pre>
+<pre><code>[1] -0.8990147  2.8021712</code></pre>
 </div>
 </div>
 <p>Use this information to replace the for loop, using a single call to <code>rnorm()</code> to simulate <code>n</code> values from the mixture distribution.</p>
@@ -1497,11 +1497,6 @@ $y
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
-            }
               // target, if specified
               link.setAttribute("target", "_blank");
               if (link.getAttribute("rel") === null) {
@@ -1545,11 +1540,7 @@ $y
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+          return note.innerHTML;
         });
       }
       const findCites = (el) => {

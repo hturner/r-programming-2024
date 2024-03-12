@@ -9,11 +9,11 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.551">
+  <meta name="generator" content="quarto-1.4.549">
 
-  <meta name="author" content="Heather Turner and Ella Kaye">
+  <meta name="author" content="Ella Kaye and Heather Turner">
   <meta name="author" content="Department of Statistics, University of Warwick">
-  <meta name="dcterms.date" content="2023-06-20">
+  <meta name="dcterms.date" content="2024-03-19">
   <title>R Programming - Profiling</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -396,12 +396,12 @@
 
 <section id="title-slide" data-background-color="#552D62" class="quarto-title-block center">
   <h1 class="title">Profiling</h1>
-  <p class="subtitle">Advanced R</p>
+  <p class="subtitle">R Programming</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Heather Turner and Ella Kaye 
+Ella Kaye and Heather Turner 
 </div>
 </div>
 <div class="quarto-title-author">
@@ -411,7 +411,7 @@ Department of Statistics, University of Warwick
 </div>
 </div>
 
-  <p class="date">June 20, 2023</p>
+  <p class="date">March 19, 2024</p>
 </section>
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
@@ -957,11 +957,6 @@ Department of Statistics, University of Warwick
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
-            }
               // target, if specified
               link.setAttribute("target", "_blank");
               if (link.getAttribute("rel") === null) {
@@ -1005,11 +1000,7 @@ Department of Statistics, University of Warwick
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+          return note.innerHTML;
         });
       }
       const findCites = (el) => {
