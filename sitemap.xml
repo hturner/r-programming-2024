@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/schedule.html</loc>
-    <lastmod>2024-03-11T14:25:34.184Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/06-profiling/index.html</loc>
-    <lastmod>2024-03-12T11:00:36.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/01-welcome/index.html</loc>
-    <lastmod>2024-03-12T10:36:39.250Z</lastmod>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
   </url>
   <url>
     <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/04-github/index.html</loc>
-    <lastmod>2024-03-12T09:38:32.279Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/05-efficient-programming/index.html</loc>
-    <lastmod>2024-03-12T10:59:53.493Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/03-classes-methods/index.html</loc>
-    <lastmod>2024-03-12T09:53:47.807Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/07-r-with-cpp/index.html</loc>
-    <lastmod>2024-03-12T09:52:42.268Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/02-functions/index.html</loc>
-    <lastmod>2024-03-12T09:53:07.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/prerequisites.html</loc>
-    <lastmod>2024-03-11T13:54:00.509Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content.html</loc>
-    <lastmod>2024-03-11T13:37:48.130Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/join.html</loc>
-    <lastmod>2024-03-11T13:37:48.210Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/05-efficient-programming/index.html</loc>
-    <lastmod>2024-03-12T10:09:42.692Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/04-github/index.html</loc>
-    <lastmod>2024-03-12T09:57:11.325Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/01-welcome/index.html</loc>
-    <lastmod>2024-03-12T10:09:31.112Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/06-profiling/index.html</loc>
-    <lastmod>2024-03-12T09:52:37.255Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/index.html</loc>
-    <lastmod>2024-03-11T13:47:40.065Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/00-template/index.html</loc>
-    <lastmod>2024-03-11T13:37:48.135Z</lastmod>
+    <lastmod>2024-03-12T11:09:00.220Z</lastmod>
   </url>
   <url>
     <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/02-functions/index.html</loc>
-    <lastmod>2024-03-12T10:58:39.099Z</lastmod>
+    <lastmod>2024-03-12T11:09:00.220Z</lastmod>
   </url>
   <url>
-    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/07-r-with-cpp/index.html</loc>
-    <lastmod>2024-03-12T11:01:11.403Z</lastmod>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/01-welcome/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/00-template/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/join.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/07-r-with-cpp/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/06-profiling/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/03-classes-methods/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/05-efficient-programming/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/prerequisites.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/01-welcome/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/02-functions/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/content/04-github/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/05-efficient-programming/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.220Z</lastmod>
   </url>
   <url>
     <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/03-classes-methods/index.html</loc>
-    <lastmod>2024-03-12T10:59:01.280Z</lastmod>
+    <lastmod>2024-03-12T11:09:00.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/06-profiling/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/slides/07-r-with-cpp/index.html</loc>
+    <lastmod>2024-03-12T11:09:00.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Warwick-Stats-Resources.github.io/r-programming-2024/schedule.html</loc>
+    <lastmod>2024-03-12T11:09:00.212Z</lastmod>
   </url>
 </urlset>
