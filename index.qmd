@@ -1,24 +1,26 @@
 ---
-title: "quarto-course-website"
+title: "R Programming"
 ---
 
-Welcome to the course!
+Welcome to the R Programming course for 2024!
 
-This course is aimed primarily at...
+This course is taking place as part of the University of Warwick's 2024 Spring Training Week, organised by the [SCRPT](https://warwick.ac.uk/research/rtp/sc/).
 
 ## Syllabus overview
 
-What we're covering...
+This is an intermediate/advanced level course. Topics we'll cover include writing functions, error handling and debugging, classes and methods, efficient programming, profiling, C++ and Rcpp, and R tools for working with git/GitHub.
+
+Please ensure that you have met the [prerequisites](https://warwick-stats-resources.github.io/advanced-r-packages/prerequisites.html) before signing up, both in terms of prior R knowledge/experience and software set-up. Note that no prior knowledge of C++ is assumed. 
 
 All slides and further resources can be accessed from the [content](content.qmd) page and also via the [schedule](schedule.qmd). 
 
 ## Session details
 
-{{< fa calendar >}} &nbsp; **DAY OF COURSE**
+{{< fa calendar >}} &nbsp; **Monday March 18th, Tuesday March 19th**
 
-{{< fa clock >}} &nbsp; **TIME OF COURSE**
+{{< fa clock >}} &nbsp; **9:30 -- 16:30 (Monday), 9:30 -- 13:30 (Tuesday)**
 
-{{< fa location-dot >}} &nbsp; **LOCATION** 
+{{< fa location-dot >}} &nbsp; **A1.27 Milburn** 
 
 {{< fa calendar-alt >}} &nbsp; See the full [schedule](schedule.qmd).
 
@@ -26,9 +28,9 @@ Please see the [join](join.qmd) page for more details on how to attend the cours
 
 ## Instructor details
 
-{{< fa user >}} &nbsp; [**INSTRUCTOR**](https://INTSTRUCTOR-WEB-PAGE)
+{{< fa user >}} &nbsp; [**Ella Kaye**](https://warwick.ac.uk/ellakaye) and [**Heather Turner**](https://warwick.ac.uk/heatherturner)
 
-{{< fa envelope >}} &nbsp; [**INSTRUCTOR E-MAIL**](mailto:INSTRUCTOR-E-MAIL)
+{{< fa envelope >}} &nbsp; [**ella.m.kaye@warwick.ac.uk**](mailto:ella.m.kaye@warwick.ac.uk) and [**h.turner.1@warwick.ac.uk**](mailto:h.turner.1@warwick.ac.uk)
 
 ## Prerequistes
 

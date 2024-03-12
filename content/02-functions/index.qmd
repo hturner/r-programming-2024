@@ -1,0 +1,32 @@
+---
+title: "Functions"
+author: Ella Kaye
+date: 2024-03-18T10:10:00
+date-format: long
+---
+
+## Slides
+
+Here's a link to the [slides](/slides/02-functions/index.qmd){target="_blank"} in a new window. 
+
+Here are the slides embedded:
+
+<iframe class="slide-deck ar3x2" src="/slides/02-functions/index.html" title="02-functions slides">
+</iframe>
+
+## Resources
+
+### Reading
+
+- Functions chapter from Advanced R, Hadley Wickham
+
+  <https://adv-r.hadley.nz/functions.html>
+
+- Debugging chapter from Advanced R, Hadley Wickham
+
+  <https://adv-r.hadley.nz/debugging.html>
+  
+- Debugging from the RStudio User Guide
+
+  <https://docs.posit.co/ide/user/ide/guide/code/debugging.html>
+

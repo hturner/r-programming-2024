@@ -1,0 +1,48 @@
+---
+title: "C++ and Rcpp"
+author: Ella Kaye
+date: 2024-03-19T11:30:00
+date-format: long
+---
+
+## Slides
+
+Here's a link to the [slides](/slides/07-r-with-cpp/index.qmd){target="_blank"} in a new window. 
+
+Here are the slides embedded:
+
+<iframe class="slide-deck ar3x2" src="/slides/07-r-with-cpp/index.html" title="07-r-with-cpp slides">
+</iframe>
+
+## Resources
+
+### Reading
+
+- Similar scope to this module: Gillespie, C and Lovelace, R, _Efficient R programming_, _Rcpp section_ 
+
+  <https://csgillespie.github.io/efficientR/performance.html#rcpp>
+
+- Going a bit further: Wickham, H, _Advanced R_ (2nd edn), _Rewriting R code in C++ chapter_ 
+
+  <https://adv-r.hadley.nz/rcpp.html>
+
+- Not very polished, but broader coverage of Rcpp functionality: Tsuda, M.E., _Rcpp for everyone_
+  
+  <https://teuder.github.io/rcpp4everyone_en/300_Rmath.html>
+
+- The **Rcpp** vignettes, accessed via `browseVignettes("Rcpp")` or [CRAN](https://CRAN.R-project.org/package=Rcpp)
+
+- The unofficial [Rcpp API documentation](https://thecoatlessprofessor.com/programming/cpp/unofficial-rcpp-api-documentation)
+
+- Case studies (optimising by improving R code and/or using C++)
+  - <https://robotwealth.com/optimising-the-rsims-package-for-fast-backtesting-in-r/>
+  - <https://gallery.rcpp.org/articles/bayesian-time-series-changepoint/>
+  - The [Rcpp Gallery](https://gallery.rcpp.org/) has all sorts of examples, many illustrating advanced features of Rcpp).
+
+### Packages
+
+- **Rcpp**
+  - <https://www.rcpp.org>
+  - <https://github.com/RcppCore/Rcpp>
+  - <https://dirk.eddelbuettel.com/code/rcpp.html>
+  

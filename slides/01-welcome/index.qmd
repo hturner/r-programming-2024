@@ -1,0 +1,110 @@
+---
+title: Welcome and Introduction
+subtitle: R Programming 2024
+author: 
+  - name: Heather Turner and Ella Kaye
+  - name: Department of Statistics, University of Warwick
+title-slide-attributes:
+  data-background-color: "#552D62"
+date: 2024-03-18
+date-format: long
+format: 
+  warwickpres-revealjs:
+    execute:
+      echo: true
+      code-overflow: wrap
+---
+
+# Hello! {.inverse .center-h}
+
+## Instructors
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Ella Kaye
+
+![](images/ellakaye-profile-2023-square.jpeg){width=50%}
+
+:::{.smaller80}
+Research Software Engineer 
+
+Department of Statistics
+
+University of Warwick
+
+<https://warwick.ac.uk/ellakaye>
+:::
+:::
+
+::: {.column width="50%"}
+### Heather Turner
+
+![](images/heather_turner.jpg){width=50%}
+
+:::{.smaller80}
+RSE Fellow
+
+Department of Statistics
+
+University of Warwick
+
+<https://warwick.ac.uk/heatherturner>
+:::
+
+:::
+
+::::
+
+
+## Course material
+
+- Website and slides 
+  
+  <https://Warwick-Stats-Resources.github.io/r-programming-2024>
+  
+- Website and slides repo
+
+  <https://github.com/Warwick-Stats-Resources/r-programming-2024>
+  
+- Exercises and additional material
+
+  <https://github.com/Warwick-Stats-Resources/Advanced-R-exercises>
+  
+## Schedulue: Monday March 18th
+
+:::{.smaller70}
+| Time         | Session                           | Presenter |
+|--------------|-----------------------------------| ----------|
+| 09:30--10:00 | Coffee                     | |
+| 10:00--10:10 | [Welcome and Introduction](content/01-welcome/index.qmd) | Ella Kaye, Heather Turner |
+| 10:10--11:25 | [Functions](content/02-functions/index.qmd)  | Ella Kaye |
+| 11:25--11:40 | Coffee break                     | |
+| 11:40--13:00 | [Classes and Methods](content/03-classes-methods/index.qmd)   | Ella Kaye |
+| 12:30--13:30 | Lunch                             | |
+| 13:30--14:45 | [Open Source and Git(Hub)](content/04-github/index.qmd)   | Ella Kaye |
+| 14:45--15:00 | Coffee break                      | |
+| 15:00--16:30 | [Efficient Programming](content/05-efficient-programming/index.qmd) | Heather Turner |
+:::
+
+## Schedule: Tuesday March 19th
+
+:::{.smaller75}
+| Time         | Session                           | Presenter |
+|--------------|-----------------------------------|-----------|
+| 09:30--10:00 | Coffee                     | |
+| 10:00--11:15 | [Profiling](content/06-profiling/index.qmd)             | Ella Kaye |
+| 11:15--11:30 | Coffee break                      | |
+| 11:30--13:00 | [C++ and Rcpp](content/07-r-with-cpp/index.qmd)          | Ella Kaye |
+| 13:00--13:30 | Lunch                             | |
+:::
+
+## SkillsForge
+
+Sign up by clicking [here](https://skillsforge.warwick.ac.uk/warwick/#he/dev/eventDetails,;em,providerCode=ST,providerOrgAlias=warwick,number=4,) or by going to <https://skillsforge.warwick.ac.uk> and searching for "R Programming".
+
+I'll give you a password at the **end** of the course.
+
+After the course, e-mail [ella.m.kaye@warwick.ac.uk](mailto:ella.m.kaye@warwick.ac.uk) with the password and I'll register you as having attended.
+
+# Let's begin... {.inverse .center-h}

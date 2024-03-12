@@ -1,0 +1,34 @@
+---
+title: "Profiling"
+author: Ella Kaye
+date: 2024-03-19T10:00:00
+date-format: long
+---
+
+## Slides
+
+Here's a link to the [slides](/slides/06-profiling/index.qmd){target="_blank"} in a new window. 
+
+Here are the slides embedded:
+
+<iframe class="slide-deck ar3x2" src="/slides/06-profiling/index.html" title="06-profiling slides">
+</iframe>
+
+## Resources
+
+### Reading
+
+- Wickham, H, _Advanced R_ (2nd edn), _Improving performance section_ 
+
+  <https://adv-r.hadley.nz/perf-improve.html>
+
+- Gillespie, C and Lovelace, R, _Efficient R programming_
+ 
+  <https://csgillespie.github.io/efficientR/>
+
+
+### Packages
+
+- **profvis**
+
+  <https://rstudio.github.io/profvis/>

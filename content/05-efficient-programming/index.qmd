@@ -1,0 +1,41 @@
+---
+title: "Efficient Programming"
+author: Heather Turner
+date: 2024-03-18T15:00:00
+date-format: long
+---
+
+## Slides
+
+Here's a link to the [slides](/slides/05-efficient-programming/index.qmd){target="_blank"} in a new window. 
+
+Here are the slides embedded:
+
+<iframe class="slide-deck ar3x2" src="/slides/05-efficient-programming/index.html" title="05-efficient-programming slides">
+</iframe>
+
+## Resources
+
+### Reading
+
+Good references on optimizing R code:
+
+- Wickham, H, _Advanced R_ (2nd edn), _Improving performance section_, <https://adv-r.hadley.nz/perf-improve.html>
+
+- Gillespie, C and Lovelace, R, _Efficient R programming_, <https://csgillespie.github.io/efficientR/>
+
+Tutorials on the Futureverse:
+
+- <https://www.futureverse.org/tutorials.html>
+
+### Packages
+
+- **efficient**
+
+  <https://github.com/csgillespie/efficient> 
+
+- **future** and **future.apply** from the Futureverse
+
+  <https://future.futureverse.org>
+  
+  <https://future.apply.futureverse.org>

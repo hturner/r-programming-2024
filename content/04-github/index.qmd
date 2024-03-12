@@ -1,0 +1,31 @@
+---
+title: "Open Source and Git(Hub)"
+author: Ella Kaye
+date: 2024-03-18T13:30:00
+date-format: long
+---
+
+***This page and the slides for this session are still under development***
+
+## Slides
+
+Here's a link to the [slides](/slides/04-github/index.qmd){target="_blank"} in a new window. 
+
+Here are the slides embedded:
+
+<iframe class="slide-deck ar3x2" src="/slides/04-github/index.html" title="04-github slides">
+</iframe>
+
+## Resources
+
+### Reading
+
+- TITLE
+
+  <LINK>
+
+
+### Packages
+
+- **usethis**
+  - <https://usethis.r-lib.org>

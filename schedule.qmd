@@ -1,5 +1,28 @@
 ---
 title: "Schedule"
+tbl-colwidths: [22, 60, 18]
 ---
 
-**Schedule goes here**
+### Monday March 18th, 2024
+
+| Time         | Session                           | Presenter |
+|--------------|-----------------------------------| ----------|
+| 09:30--10:00 | Coffee                     | |
+| 10:00--10:10 | [Welcome and Introduction](content/01-welcome/index.qmd) | Ella Kaye, Heather Turner |
+| 10:10--11:25 | [Functions](content/02-functions/index.qmd)  | Ella Kaye |
+| 11:25--11:40 | Coffee break                     | |
+| 11:40--13:00 | [Classes and Methods](content/03-classes-methods/index.qmd)   | Ella Kaye |
+| 12:30--13:30 | Lunch                             | |
+| 13:30--14:45 | [Open Source and Git(Hub)](content/04-github/index.qmd)   | Ella Kaye |
+| 14:45--15:00 | Coffee break                      | |
+| 15:00--16:30 | [Efficient Programming](content/05-efficient-programming/index.qmd) | Heather Turner |
+
+### Tuesday March 19th, 2024
+
+| Time         | Session                           | Presenter |
+|--------------|-----------------------------------|-----------|
+| 09:30--10:00 | Coffee                     | |
+| 10:00--11:15 | [Profiling](content/06-profiling/index.qmd)             | Ella Kaye |
+| 11:15--11:30 | Coffee break                      | |
+| 11:30--13:00 | [C++ and Rcpp](content/07-r-with-cpp/index.qmd)          | Ella Kaye |
+| 13:00--13:30 | Lunch                             | |
