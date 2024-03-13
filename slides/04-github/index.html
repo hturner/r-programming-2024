@@ -11,8 +11,10 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.551">
 
-  <meta name="author" content="INSTRUCTOR | DEPARTMENT | UNIVERSITY">
-  <title>R Programming - SESSION TITLE</title>
+  <meta name="author" content="Ella Kaye and Heather Turner">
+  <meta name="author" content="Department of Statistics, University of Warwick">
+  <meta name="dcterms.date" content="2024-03-18">
+  <title>R Programming - Open Source and Git(Hub)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,6 +32,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #adadbd;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #adadbd;  padding-left: 4px; }
+    div.sourceCode
+      { color: #2e2e2f;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #2e2e2f; } /* Normal */
+    code span.al { color: #ae4240; } /* Alert */
+    code span.an { color: #494957; } /* Annotation */
+    code span.at { color: #775781; } /* Attribute */
+    code span.bn { color: #ae4240; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #956133; } /* ControlFlow */
+    code span.ch { color: #618157; } /* Char */
+    code span.cn { color: #956133; } /* Constant */
+    code span.co { color: #494957; } /* Comment */
+    code span.cv { color: #494957; font-style: italic; } /* CommentVar */
+    code span.do { color: #494957; font-style: italic; } /* Documentation */
+    code span.dt { color: #ae4240; } /* DataType */
+    code span.dv { color: #ae4240; } /* DecVal */
+    code span.er { color: #ae4240; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ae4240; } /* Float */
+    code span.fu { color: #336695; } /* Function */
+    code span.im { color: #775781; } /* Import */
+    code span.in { color: #494957; } /* Information */
+    code span.kw { color: #2e2e2f; } /* Keyword */
+    code span.op { color: #494957; } /* Operator */
+    code span.ot { color: #494957; } /* Other */
+    code span.pp { color: #ae4240; } /* Preprocessor */
+    code span.re { color: #336695; } /* RegionMarker */
+    code span.sc { color: #494957; } /* SpecialChar */
+    code span.ss { color: #618157; } /* SpecialString */
+    code span.st { color: #618157; } /* String */
+    code span.va { color: #2e2e2f; } /* Variable */
+    code span.vs { color: #618157; } /* VerbatimString */
+    code span.wa { color: #494957; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -327,91 +395,630 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#552D62" class="quarto-title-block center">
-  <h1 class="title">SESSION TITLE</h1>
-  <p class="subtitle">COURSE NAME</p>
+  <h1 class="title">Open Source and Git(Hub)</h1>
+  <p class="subtitle">R Programming</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-INSTRUCTOR | DEPARTMENT | UNIVERSITY 
+Ella Kaye and Heather Turner 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Department of Statistics, University of Warwick 
 </div>
 </div>
 </div>
 
-  <p class="date">Invalid Date</p>
+  <p class="date">March 18, 2024</p>
 </section>
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
 <ul>
-<li>What we’re covering</li>
+<li><p>Open code and software</p></li>
+<li><p>git</p></li>
+<li><p>GitHub</p></li>
+<li><p>git and GitHub with RStudio</p></li>
 </ul>
 </section>
-<section id="section" class="title-slide slide level1 inverse center">
-<h1>Section</h1>
-
-</section>
-
 <section>
-<section id="end-matter" class="title-slide slide level1 inverse center">
-<h1>End matter</h1>
+<section id="open-code-and-software" class="title-slide slide level1 center" data-background-color="#552D62">
+<h1>Open code and software</h1>
+<p>From <a href="https://www.heatherturner.net/talks/gregynog2022/#1" class="uri">https://www.heatherturner.net/talks/gregynog2022/#1</a></p>
+</section>
+<section id="open-practices" class="slide level2">
+<h2>Open practices</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Recognised as integral to healthy research culture</p>
+<p>Working openly means that our work is</p>
+<ul>
+<li>Accessible, for free</li>
+<li>Open to scrutiny (verifiable)</li>
+<li>Reproducible</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="images/open-pexels-analogicus-5395777.jpg" alt="A rustic wooden 'Open' sign on a green wooden door" style="height:400px"> <small>(source: <a href="https://www.pexels.com/photo/wooden-welcome-signage-on-green-wooden-door-5395777/">analogicus from Pexels</a>)</small></p>
+</div>
+</div>
+</section>
+<section id="code-and-software" class="slide level2">
+<h2>Code and Software</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Scripts: e.g analysis/simulation</p>
+<ul>
+<li>Customised</li>
+<li>Reproducible workflow
+<ul>
+<li>read data</li>
+<li>analyse</li>
+<li>summarise</li>
+<li>report</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Software: Package, tool, dashboard</p>
+<ul>
+<li>Optimized</li>
+<li>Reusable</li>
+<li>Sharable</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="why-share-code-and-software" class="slide level2">
+<h2>Why share code and software?</h2>
+<p>Beyond general benefits of open practices</p>
+<ul>
+<li>Increased impact and reputation</li>
+<li>Faster translation into practice</li>
+<li>Additional, citable, outputs</li>
+</ul>
+<p>Benefits of coding in the open</p>
+<ul>
+<li>Encourages good practices</li>
+<li>Facilitates collaboration</li>
+<li>Can give access to software engineering tools</li>
+</ul>
+</section>
+<section id="sharing-code-in-an-online-repository" class="slide level2">
+<h2>Sharing code in an online repository</h2>
+<div class="columns">
+<div class="column" style="width:66%;">
+<h3 id="pros">Pros</h3>
+<ul>
+<li>Version control (commit history + releases)</li>
+<li>README.md for quick documentation</li>
+<li>Facilitates contribution (bug reports, patches)</li>
+<li>Can use CITATION.cff file for clear citation <a href="#/github">GitHub</a></li>
+<li>Links to Zenodo for publishing releases</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Learning curve to take full advantage</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<br>
+<center>
+<a href="https://github.com/"> <img src="images/GitHub_Logo.png" alt="Logo for GitHub" style="height:90px"> </a> <br> <a href="https://github.com/"> <img src="images/gitlab-logo.png" alt="Logo for GitLab" style="height:180px"> <br> </a>
+</center>
+</div>
+</div>
+</section>
+<section id="more-on-open-code-and-software" class="slide level2">
+<h2>More on open code and software</h2>
+<p>See <a href="https://www.heatherturner.net/talks/gregynog2022/#1" class="uri">https://www.heatherturner.net/talks/gregynog2022/#1</a></p>
+</section></section>
+<section>
+<section id="git" class="title-slide slide level1 center" data-background-color="#552D62">
+<h1>git</h1>
 
 </section>
-<section id="resources" class="slide level2">
-<h2>Resources</h2>
-<p>Material inspired by and remixed from:</p>
+<section id="version-control" class="slide level2">
+<h2>Version Control</h2>
+<p>When developing code, we often want to keep old versions.</p>
+<p>We might save with different files names</p>
+<pre><code>code                               
+  ¦--simulations.R                  
+  ¦--simulations_correct_sd.R       
+  ¦--simulations_return_parameters.R</code></pre>
+<p>or comment on changes (especially when collaborating with others)</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="do">## EK 2023-01-10 use geom_bar instead of geom_histogram</span></span>
+<span id="cb2-2"><a></a><span class="do">## p &lt;- p + geom_histogram(stat = "identity")</span></span>
+<span id="cb2-3"><a></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span>
+<span id="cb2-4"><a></a><span class="do">## HT 2023-01-09 remove legend from plot</span></span>
+<span id="cb2-5"><a></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Either way it can get messy and hard to track/revert changes!</p>
+</section>
+<section id="git-1" class="slide level2">
+<h2>git</h2>
+<p>git is a version control system that allows us to record changes made to files in a <em>repository</em> or <em>repo</em>.</p>
+<p>Each version has a unique ID and metadata:</p>
 <ul>
-<li></li>
+<li>Who created the new version</li>
+<li>A short description of changes made</li>
+<li>When the version was made</li>
 </ul>
+<p>Versions can be compared, restored and merged.</p>
+</section></section>
+<section>
+<section id="git-protection" class="title-slide slide level1 center" data-menu-title="Hadley Wickham and Jenny Bryan quote" data-background-image="images/github_wickham_bryan_git_quote.png" data-background-size="contain">
+<h1></h1>
+
+</section>
+<section id="git-repository" class="slide level2">
+<h2>git repository</h2>
+<p>To get started, a repository must be created locally (within a working directory on your computer) or on a remote hosting platform (we’ll use GitHub).</p>
+<p>git can then track when files/folders are</p>
+<ul>
+<li>Added</li>
+<li>Modified</li>
+<li>Deleted</li>
+</ul>
+<p>Repositories can have multiple <em>branches</em> of development. We will work on a single branch, with the default name of <code>main</code>.</p>
+</section>
+<section id="staging-and-committing" class="slide level2">
+<h2>Staging and committing</h2>
+<p>Versions are created in a <em>commit</em>.</p>
+<p>We prepare the commit by <em>staging</em> changes we want to record:</p>
+<ul>
+<li><em>Untracked</em> files (git treats the whole content as new)</li>
+<li><em>Tracked</em> files that have been modified or deleted since the last commit</li>
+</ul>
+<p>Think of it like taking photographs: we stage the scene by adding/removing people, or changing people’s outfits, when we have a scene we want to save we take a photograph.</p>
+</section></section>
+<section>
+<section id="github" class="title-slide slide level1 center" data-background-color="#552D62">
+<h1>GitHub</h1>
+
+</section>
+<section id="git-github" class="slide level2">
+<h2>git + Github</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The full power comes by connecting a local repo to GitHub.</p>
+<ul>
+<li>You can make changes locally and <em>push</em> them to GitHub</li>
+<li>You can make changes via the GitHub website and later <em>pull</em> them into your local copy.</li>
+<li>Collaborators can also push/pull changes to the repo.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/how_github_works.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="Diagram showing arrows to and from your repo and a central remote repo (GitHub). There are more arrows to and from GitHub and the web UI. There are also arrows to and from GitHub and &quot;their repo&quot; representing another person."></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="github-1" class="slide level2">
+<h2>GitHub</h2>
+<p>Warwick GitHub Enterprise: <a href="https://github.warwick.ac.uk/" class="uri">https://github.warwick.ac.uk/</a></p>
+<ul>
+<li>Use for Warwick-specific, private projects</li>
+<li>Username will be ITS username</li>
+</ul>
+<p>GitHub: <a href="https://github.com/" class="uri">https://github.com/</a></p>
+<ul>
+<li>Free version allows private/public projects</li>
+<li>Can share/collaborate with people outside Warwick</li>
+<li>Develop your personal portfolio</li>
+</ul>
+</section>
+<section id="features" class="slide level2">
+<h2>Features</h2>
+<p>GitHub repositories have some nice features:</p>
+<ul>
+<li><code>README.md</code> displayed as HTML</li>
+<li>Browsable commit history</li>
+<li><em>Issues</em> where you/others can note bug reports/TODO/feature requests</li>
+<li><em>Pull requests</em> (advanced) where you/others can propose changes to the code to be reviewed</li>
+<li><em>Actions</em> (advanced) automated actions when you commit to the repo</li>
+<li><em>Projects</em> (advanced) to organize issues (To Do/In Progress/Done)</li>
+<li><em>Wiki</em> for project documentation</li>
+<li>Deploy websites with <em>pages</em></li>
+</ul>
+</section>
+<section id="further-benefits-of-github" class="slide level2">
+<h2>Further benefits of GitHub</h2>
+<h3 id="research-compendia">Research compendia</h3>
+<p>Potential to use Binder to so that people can run your code in the browser</p>
+<ul>
+<li><p>For short analysis (&lt;10 min) on small data (&lt; 10MB)</p></li>
+<li><p><a href="https://the-turing-way.netlify.app/communication/binder/zero-to-binder.html">Zero to Binder</a> tutorial [Julia, Python, R]</p></li>
+</ul>
+<h3 id="software-packages">Software packages</h3>
+<ul>
+<li><p>Users can install Julia/Python/R packages from GitHub</p></li>
+<li><p>Can deploy package websites using GitHub pages</p></li>
+<li><p>Can benefit from GitHub Actions, e.g.&nbsp;automatically running tests</p></li>
+</ul>
+</section>
+<section id="your-turn-explore-some-github-repositories" class="slide level2">
+<h2>Your turn! Explore some GitHub repositories</h2>
+<ul>
+<li><a href="https://github.com/Warwick-Stats-Resources/r-programming-2024">This course website and slides</a></li>
+<li><a href="https://github.com/allisonhorst/palmerpenguins">{palmerpenguins}</a></li>
+<li><a href="https://github.com/r-devel/rdevguide">R development guide</a></li>
+</ul>
+</section>
+<section id="your-turn-create-a-github-repository" class="slide level2">
+<h2>Your turn! Create a GitHub repository</h2>
+<ul>
+<li><p>Login or sign up for a free account at <a href="https://www.github.com" class="uri">https://www.github.com</a>.</p>
+<ul>
+<li><p>Recommend to use personal email</p></li>
+<li><p>Username recommendations:</p>
+<ul>
+<li>Incorporate your actual name</li>
+<li>Reuse your username from other contexts.</li>
+<li>Use a name you can share in professional contexts.</li>
+<li>Use all lower case letters.</li>
+</ul></li>
+</ul></li>
+<li><p>Click on <code>+</code> in the top right to create a new, public, repository called <code>github-intro</code>.</p>
+<ul>
+<li>Choose to initialize the repository with a README file</li>
+</ul></li>
+</ul>
+</section>
+<section id="your-turn-edit-on-github" class="slide level2">
+<h2>Your turn! Edit on GitHub</h2>
+<div class="smaller75">
+<ul>
+<li><p>Click the pencil icon on the <code>README.md</code> file to edit.</p>
+<ul>
+<li>Update the title</li>
+<li>Add some example content using markdown syntax</li>
+<li>Use the “Preview changes” tab to check your edits</li>
+</ul></li>
+<li><p>Scroll down to the <strong>Commit changes</strong> section</p>
+<ul>
+<li><p>Add a short description of your changes in the first dialog box, e.g.&nbsp;<code>add basic information to README</code></p></li>
+<li><p>Click the green <code>Commit changes</code> button</p></li>
+<li><p>This will stage and commit the file in one go.</p></li>
+</ul></li>
+<li><p>View the commit history (look for clock icon with anti-clockwise arrow) and look at the diff for your commit.</p></li>
+</ul>
+<p>See <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">Basic writing and formatting syntax</a> for more on editing markdown.</p>
+</div>
+</section>
+<section id="your-turn-continue-experimenting" class="slide level2">
+<h2>Your turn! Continue experimenting</h2>
+<p>Further exercises to do while other people set up authentication.</p>
+<ul>
+<li><p>Try uploading a picture from <a href="https://unsplash.com/">Unsplash</a>. Go to Add file &gt; Upload files. Edit your README to add the image.</p></li>
+<li><p>Go to Add file &gt; Create new file. Type <code>subfolder/</code> in the “Name your file box” to create a subfolder. Now type <code>README.md</code> in the “Name your file box”. Add some content to the README and commit - try some new markdown syntax, e.g.&nbsp;emoji or a table.</p></li>
+<li><p><a href="https://towardsdatascience.com/build-a-stunning-readme-for-your-github-profile-9b80434fe5d7">Build a stunning README for your GitHub profile</a></p></li>
+</ul>
+</section></section>
+<section>
+<section id="configuring-git-and-github" class="title-slide slide level1 center" data-background-color="#552D62">
+<h1>Configuring git and GitHub</h1>
+
+</section>
+<section id="using-git-locally" class="slide level2">
+<h2>Using git locally</h2>
+<p>Check if you already have git by running the following command in a terminal (e.g.&nbsp;Terminal tab on RStudio).</p>
+<p>On MacOS/Linux (or Windows with Rtools)</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="fu">which</span> git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On Windows</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="ex">where</span> git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>MacOS: If asked to install the Xcode command line tools, say yes - this will install git.</p>
+</section>
+<section id="installing-git" class="slide level2">
+<h2>Installing git</h2>
+<p>Windows:</p>
+<ul>
+<li><p>Use the installer from <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p></li>
+<li><p>Check RStudio can find the git executable</p>
+<ul>
+<li>Go to Tools &gt; Global Options &gt; Git/SVN to check</li>
+<li>Restart RStudio before trying to use git</li>
+</ul></li>
+</ul>
+<p>Linux:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="fu">sudo</span> apt-get install git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="fu">sudo</span> yum install git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="configure-git-globally" class="slide level2">
+<h2>Configure git (globally)</h2>
+<p>Set the default name and email to associate with your git commits:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(usethis)</span>
+<span id="cb7-2"><a></a><span class="fu">use_git_config</span>(</span>
+<span id="cb7-3"><a></a>  <span class="at">user.name =</span> <span class="st">"Ada Lovelace"</span>,     <span class="co"># your full name</span></span>
+<span id="cb7-4"><a></a>  <span class="at">user.email =</span> <span class="st">"ada@example.com"</span>  <span class="co"># email associated with GitHub account</span></span>
+<span id="cb7-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To keep your email private:</p>
+<ul>
+<li>Go to <a href="https://github.com/settings/emails" class="uri">https://github.com/settings/emails</a>, select “Keep my email address private” and “Block command line pushes that expose my email” options</li>
+<li>Configure git to use the address provided of the form <a href="mailto:ID+username@users.noreply.github.com" class="email">ID+username@users.noreply.github.com</a></li>
+</ul>
+</section>
+<section id="authentication" class="slide level2">
+<h2>Authentication</h2>
+<p>GitHub requires authentication with a Personal Access Token or SSH key.</p>
+<table>
+<thead>
+<tr class="header">
+<th>SSH keys</th>
+<th>PAT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>More setup (on Windows)</td>
+<td><strong>usethis</strong> helpers</td>
+</tr>
+<tr class="even">
+<td>Once per computer+host</td>
+<td>Renew every 30 days (recommended)</td>
+</tr>
+<tr class="odd">
+<td>Need for HPC</td>
+<td>Need for <strong>usethis</strong>/other R packages</td>
+</tr>
+</tbody>
+</table>
+<p>Recommend: PAT now (easier), SSH later if needed</p>
+</section>
+<section id="main-recommendations" class="slide level2">
+<h2>Main recommendations</h2>
+<p>From <strong>usethis</strong> vignette <a href="https://usethis.r-lib.org/articles/git-credentials.html">Managing Git(Hub) Credentials</a>:</p>
+<p>Our main recommendations are:</p>
+<ul>
+<li>Adopt HTTPS as your Git transport protocol.</li>
+<li>Turn on two-factor authentication for your GitHub account.</li>
+<li>Use a personal access token (PAT) for all Git remote operations from the command line or from R.</li>
+<li>Allow tools to store and retrieve your credentials from the Git credential store. If you have previously set your GitHub PAT in .Renviron, stop doing that.</li>
+</ul>
+<p><em>Highly recommend reading this entire vignette and following all guidance</em></p>
+</section>
+<section id="sitrep-and-vaccinate" class="slide level2">
+<h2>sitrep and vaccinate</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(usethis) <span class="co"># make sure &gt; v2.0.0</span></span>
+<span id="cb8-2"><a></a><span class="fu">git_sitrep</span>() <span class="co"># current situation report</span></span>
+<span id="cb8-3"><a></a><span class="fu">git_vaccinate</span>() <span class="co"># add files to global .gitignore (best practice)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="get-a-personal-access-token-pat" class="slide level2">
+<h2>Get a personal access token (PAT)</h2>
+<p>First, make sure you’re signed into GitHub. Then run</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Add Note describing use-case (e.g.&nbsp;personal-macbook-pro-2021, project-xyz)</li>
+<li>Select expiration (recommend default 30 days)</li>
+<li>Check scope</li>
+<li>Click ‘Generate Token’</li>
+<li><strong>Important!</strong> Copy token to clipboard, do not close window until stored (see next slide)!</li>
+<li>You may want to store token in a secure vault, like 1Password or BitWarden</li>
+</ul>
+</section>
+<section id="put-your-pat-into-the-local-git-credential-store" class="slide level2">
+<h2>Put your PAT into the local Git credential store</h2>
+<p>By installing <strong>usethis</strong>, you will also have the <strong>gitcreds</strong> package to manage git credentials.</p>
+<p>Put your PAT into the Git credential store by running the following command and entering your copied PAT at the prompt (assume the PAT is on your clipboard).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>If you don’t have a PAT stored, will prompt you to enter: paste!</li>
+<li>If you do, you will be given a choice to keep/replace/see the password
+<ul>
+<li>choose as appropriate</li>
+<li>if replacing, paste!</li>
+</ul></li>
+</ul>
+</section>
+<section id="pat-maintenance" class="slide level2">
+<h2>PAT maintenance</h2>
+<ul>
+<li>By default token will expire after 30 days.</li>
+<li>Return to <a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a> and click on its <em>Note</em>
+<ul>
+<li>or else click on link in e-mail telling you token is about to expire!</li>
+</ul></li>
+<li>Regenerate token</li>
+<li>rerun <code>gitcreds::gitcreds_set()</code></li>
+</ul>
+<p>A bit of a pain to do this every month, but only takes a couple of minutes.</p>
+</section>
+<section id="your-turn" class="slide level2">
+<h2>Your turn!</h2>
+<p>If you need to, generate and store a PAT, as described over last few slides and in the <a href="https://usethis.r-lib.org/articles/git-credentials.html">vignette</a>.</p>
+<p>If you already have a PAT set, read the vignette and follow through on other best practice recommendations.</p>
+</section>
+<section id="create-an-rstudio-project-from-a-github-repo" class="slide level2">
+<h2>Create an RStudio project from a GitHub repo</h2>
+<p>Now you can clone your GitHub repo locally.</p>
+<ul>
+<li><p>Go to your repo homepage on GitHub. Click the green “Code” button, copy the HTTPS address (of the form <code>https://github.com/USERNAME/REPO.git</code>).</p></li>
+<li><p>In RStudio, go to File &gt; New Project… &gt; Version Control &gt; Git.</p>
+<ul>
+<li>Enter the repo URL you just copied. The project directory name will be filled automatically.</li>
+<li>Browse to a location you want the project directory to be created.</li>
+<li>Click <code>Create Project</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="git-tab" class="slide level2">
+<h2>Git tab</h2>
+<p>A Git tab is added to the pane that is in the top right by default, usually with Environment, History, and Connections tabs.</p>
+<p>The initial view is equivalent to the output of the terminal command <code>git status</code>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>We can <em>stage</em> changes to commit</p>
+<p><img data-src="images/stage_changes.png"> Underlying command:<br>
+<code>git add &lt;file/folder&gt;</code>.</p>
+</div><div class="column" style="width:50%;">
+<p>Then <em>commit</em> a set of changes</p>
+<p><img data-src="images/commit_changes.png"> Underlying command:<br>
+<code>git commit -m "commit message"</code></p>
+</div>
+</div>
+</section>
+<section id="gitignore" class="slide level2">
+<h2>.gitignore</h2>
+<p>At this stage you should see two untracked files in your Git Pane that were created when setting up the project: an <code>.Rproj</code> file and a <code>.gitignore</code> file.</p>
+<p>The <code>.gitignore</code> file specifies files that git should ignore - they won’t appear in the git pane even as untracked files.</p>
+<p>Examples of how to specify files in <code>.gitignore</code>:</p>
+<ul>
+<li>Single file: <code>.Rhistory</code></li>
+<li>File pattern: <code>*.log</code> (all files with <code>.log</code> extension)</li>
+<li>Directory (and files in it): <code>/dirname/</code></li>
+</ul>
+<p>The <code>.gitignore</code> file must at least be staged to have an effect.</p>
+</section>
+<section id="first-commit-from-rstudio" class="slide level2">
+<h2>First commit from RStudio</h2>
+<ul>
+<li><p>Stage and commit the <code>.Rproj</code> file and <code>.gitignore</code> file, with the message “setup RStudio project”.</p></li>
+<li><p>Click on the clock icon in the Git pane to view the history of previous commits.</p></li>
+<li><p>Close the “Review Changes” window. Now click the green up arrow to push your changes to GitHub.</p></li>
+<li><p>Go to the repo on GitHub and verify your changes have been pushed.</p></li>
+</ul>
+</section>
+<section id="pulling-changes-from-github" class="slide level2">
+<h2>Pulling changes from GitHub</h2>
+<ul>
+<li><p>Edit the README once more on GitHub in a new commit.</p></li>
+<li><p>Back in RStudio, on the Git tab, click the blue down arrow to <em>pull</em> the changes from GitHub</p></li>
+<li><p>The changes to README should now appear in your local copy</p></li>
+</ul>
+</section>
+<section id="avoid-conflicts" class="slide level2">
+<h2>Avoid conflicts</h2>
+<p>If you work on both the local and GitHub copy, it’s possible to get out of sync and end up with conflicting versions of the same file.</p>
+<p>It <em>is</em> possible to fix this, but it can be tricky/confusing. It’s best to avoid problem in first place!</p>
+<p>Recommended practice:</p>
+<ul>
+<li>Always commit and push changes at the end of an RStudio session</li>
+<li>Always pull changes at the beginning of an RStudio session</li>
+</ul>
+</section>
+<section id="set-.rprofile-to-check-git-status" class="slide level2">
+<h2>Set <code>.Rprofile</code> to check git status</h2>
+<p>This is a neat trick (credit: Lisa De Bruine)</p>
+<p>Open your <code>.Rprofile</code></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>usethis<span class="sc">::</span><span class="fu">edit_r_profile</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and add the following (credit: Lisa De Bruine)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(cli<span class="sc">::</span><span class="fu">col_blue</span>(<span class="fu">system</span>(<span class="st">"git status -u no"</span>, <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will run <code>git status</code> from the command line when you start R, giving a (blue coloured!) message e.g.</p>
+<pre><code>On branch main Your branch is behind 'origin/main' by 1 commit,
+and can be fast-forwarded.   (use "git pull" to update your  
+local branch)  nothing to commit, working tree clean</code></pre>
+<p>If your main branch is behind the main branch on <em>origin</em> (GitHub), you should pull changes before making new edits.</p>
+</section>
+<section id="advanced-amend-commit-before-pushing" class="slide level2">
+<h2>Advanced: Amend commit (before pushing)</h2>
+<p>Sometimes we don’t stage everything we intended to include in a commit, e.g.&nbsp;we committed a file before saving the latest changes.</p>
+<p>If we haven’t yet pushed the commit to GitHub, simply stage the extra commits and check the “Amend previous commit” box under the commit message.</p>
+<p>The original commit message will be shown - you can edit this to change the message for the amended commit (useful if you forgot to reference a GitHub issue number)</p>
+</section>
+<section id="advanced-undo-last-commit-before-pushing" class="slide level2">
+<h2>Advanced: Undo last commit (before pushing)</h2>
+<p>Alternatively, you can undo a commit before pushing.</p>
+<p>To undo the commit, keeping files as they are</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a></a><span class="fu">git</span> reset HEAD~1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(change the 1 to a higher number to go back more than 1 commit).</p>
+<p>To undo the commit <em>and all the changes in that commit</em></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a></a><span class="fu">git</span> reset <span class="at">--hard</span> HEAD~1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This goes back to the version at the last commit.</p>
+</section>
+<section id="advanced-undo-last-commit-after-pushing" class="slide level2">
+<h2>Advanced: Undo last commit (after pushing)</h2>
+<p>It is best practice to create a new commit that undoes the changes. Run</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a></a><span class="fu">git</span> revert HEAD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This edits the files to undo the changes in your last commit. You should then commit these edits, with a relevant message.</p>
+<p>It is possible to use <code>git reset --hard</code> to undo a commit and then <code>git push origin main --force</code> to force this change onto GitHub. Sometimes repository maintainers do not allow this as it rewrites the history, which can cause problems for people that have cloned or forked your repo.</p>
+</section>
+<section id="general-workflow" class="slide level2">
+<h2>General workflow</h2>
+<ul>
+<li><p>Commit regularly, once you’ve got a small complete change, e.g.&nbsp;a working draft of a function, a bug fix, a draft of a README.</p>
+<ul>
+<li>It is easier to review/revert changes if they relate to a single file or common issue</li>
+</ul></li>
+<li><p>Ideally, make a commit everytime you make a substantial, coherent set of changes.</p></li>
+<li><p>At least make a commit every time you take a break, especially when leaving at the end of your working session</p></li>
+<li><p>Push often enough that GitHub is a useful backup</p></li>
+</ul>
+</section>
+<section id="adding-an-existing-project-to-github" class="slide level2">
+<h2>Adding an existing project to GitHub</h2>
+<p>The simplest approach is to create a GitHub repo with just a README as before, create the corresponding RStudio project, copy your files into the new directory, stage and commit them.</p>
+<p>If you are already using git and want to move the project to GitHub, see <a href="https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git">Adding a local repository to GitHub using git</a>. Once the project is on GitHub you can clone it into an RStudio project.</p>
+</section>
+<section id="some-other-tools" class="slide level2">
+<h2>Some other tools</h2>
+<ul>
+<li><p><a href="https://docs.ropensci.org/gert/">gert</a> R package has functions for interacting with git</p></li>
+<li><p>It can be worth using dedicated software for interacting with git/GitHub</p>
+<ul>
+<li><p><a href="https://desktop.github.com">GitHub desktop</a></p></li>
+<li><p><a href="https://www.gitkraken.com">GitKraken</a></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li><p>Working openly encourages good practices</p></li>
+<li><p>Your code/software is an asset!</p></li>
+<li><p>We can make steps to improve our own practice</p></li>
+<li><p>git and GitHub are invaluable resources for version control and collaboration</p></li>
+</ul>
+</section></section>
+<section>
+<section id="github-friends" class="title-slide slide level1 center" data-menu-title="GitHub for collaboration" data-background-image="images/github_friends.png" data-background-size="contain">
+<h1></h1>
+
+</section>
+<section id="learning-more" class="slide level2">
+<h2>Learning more</h2>
+<ul>
+<li><p>Happy Git and GitHub for the useR by Jenny Bryan</p>
+<p><a href="http://happygitwithr.com" class="uri">http://happygitwithr.com</a></p></li>
+<li><p>GitHub for supporting, reusing, contributing and failing safely by Allison Horst and Julie Lowndes</p>
+<p><a href="https://www.openscapes.org/blog/2022/05/27/github-illustrated-series/" class="uri">https://www.openscapes.org/blog/2022/05/27/github-illustrated-series/</a></p></li>
+<li><p>Version control: A practical introduction to Git and GitHub</p>
+<p><a href="https://www.jvcasillas.com/github_workshop/index.html#1" class="uri">https://www.jvcasillas.com/github_workshop/index.html#1</a></p></li>
+</ul>
+</section></section>
+<section>
+<section id="end-matter" class="title-slide slide level1 center" data-background-color="#552D62">
+<h1>End Matter</h1>
+
 </section>
 <section id="license" class="slide level2">
 <h2>License</h2>
 <p>Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>).</p>
-<!-- needs to be last chunk of presentation otherwise creates an extra slide -->
-<!-- requires Quarto v1.3 -->
-<!-- tint80 for border, tint20 for title -->
-<!-- this should hopefully no longer be necessary in Quarto 1.4 -->
-<!-- https://github.com/quarto-dev/quarto-cli/issues/5038 -->
-<style type="text/css">
-div.callout-note {
-  border-left-color: #336695 !important;
-}
-
-div.callout-note.callout-style-default .callout-title {
-  background-color: #CCD9E4 !important;
-}
-
-div.callout-caution {
-  border-left-color: #AE4240 !important;
-}
-
-div.callout-caution.callout-style-default .callout-title {
-  background-color: #ebd0cf !important;
-}
-
-div.callout-tip {
-  border-left-color: #618157 !important;
-}
-
-div.callout-tip.callout-style-default .callout-title {
-  background-color: #d8e0d5 !important;
-}
-
-div.callout-important {
-  border-left-color: #775781 !important;
-}
-
-div.callout-important.callout-style-default .callout-title {
-  background-color: #ddd5e0 !important;
-}
-
-div.callout-warning {
-  border-left-color: #956133 !important;
-}
-
-div.callout-warning.callout-style-default .callout-title {
-  background-color: #e4d8cc !important;
-}
-</style>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -629,6 +1236,44 @@ div.callout-warning.callout-style-default .callout-title {
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
