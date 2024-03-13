@@ -12,7 +12,7 @@ tbl-colwidths: [22, 60, 18]
 | 10:10--11:25 | [Functions](content/02-functions/index.qmd)  | Ella Kaye |
 | 11:25--11:40 | Coffee break                     | |
 | 11:40--13:00 | [Classes and Methods](content/03-classes-methods/index.qmd)   | Ella Kaye |
-| 12:30--13:30 | Lunch                             | |
+| 13:00--13:30 | Lunch                             | |
 | 13:30--14:45 | [Open Source and Git(Hub)](content/04-github/index.qmd)   | Ella Kaye |
 | 14:45--15:00 | Coffee break                      | |
 | 15:00--16:30 | [Efficient Programming](content/05-efficient-programming/index.qmd) | Heather Turner |
