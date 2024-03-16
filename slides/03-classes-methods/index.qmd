@@ -26,19 +26,55 @@ options(digits = 4)
 
 - Object-oriented programming
 - S3
-- S4
+- Other OOP systems (S4, R6, S7)
+
+## Source material
+
+This material is largely based on Chapters 12 and 13 of Advanced R, 2nd edition, by Hadley Wickham.
+
+The book is freely available online: <https://adv-r.hadley.nz>.
+
+It is shared under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 # Object-oriented programming {.inverse}
 
 ## Object-oriented programming (OOP)
 
-**Generic** functions provide a unified interface to **methods** for 
-objects of a particular **class**, e.g.
+With OOP, a developer can consider a function's interface separately from its implementation. 
+
+This makes it possible to use the same function for different types of input. 
+
+These are called **generic** functions. 
+
+## OOP definitions
+
+- OO systems call the type of an object its **class**.
+
+- An implementation for a specific class is called a **method**.
+
+- The class defines the **fields**, the data possessed by every instance of that class.
+
+. . .
+
+:::{.callout-tip}
+Roughly speaking, a class defines what an object *is* and methods define what an object can *do*.
+:::
+
+## OOP definitions (continued)
+
+- Classes are organised in a hierarchy, so that if a method does not exist for one class, its parent's method is used.
+
+- The child is said to **inherit** behaviour.
+
+- The process of finding the correct method given a class is called **method dispatch**.
+
+## Generic functions
+
+**Generic** functions provide a unified interface to **methods** for objects of a particular **class**, e.g.
 
 ```{r penguins}
 library(palmerpenguins)
 ```
-
 
 ```{r generic}
 summary(penguins$species)
@@ -86,6 +122,70 @@ Julia not an OOP language, but does have concept of multiple dispatch
 - so maybe a bit more like S3 idea?
 :::
 
+## sloop
+
+The **sloop** package provides tools to help you interactively explore and understand object oriented programming in R, particularly with S3.
+
+```{r}
+library(sloop)
+```
+
+## Objects
+
+In R, we can distinguish between **base objects** and **OO objects**.
+
+A base object:
+```{r}
+is.object(1:10)
+sloop::otype(1:10)
+```
+
+An OO object:
+```{r}
+is.object(penguins)
+sloop::otype(penguins)
+```
+
+
+::: {.notes}
+Everything in R is an object, but not everything is object-oriented.  
+:::
+
+## Classes
+
+Techincally, the difference between base and OO objects is that OO objects have a **class** attribute:
+
+```{r}
+attr(1:10, "class")
+attr(penguins, "class")
+sloop::s3_class(penguins)
+```
+
+## Base types
+
+Only OO objects have a class attribute, but every object has a **base type**.
+
+There are 25 different base types, e.g.
+
+```{r}
+typeof(NULL)
+typeof(1)
+typeof(1L)
+typeof("hello")
+```
+## "object of type 'closure' is not subsettable"
+
+```{r error = TRUE}
+typeof(mean)
+mean[1]
+```
+
+. . . 
+
+Jenny Bryan's talk on debugging: 
+
+<https://posit.co/resources/videos/object-of-type-closure-is-not-subsettable/>
+
 # S3 {.inverse}
 
 ## S3 objects
@@ -99,16 +199,60 @@ unique(penguins$species)
 
 ## S3 objects: the underlying object
 
-With `unclass()` we obtain the underlying object, here an integer vector 
+With `unclass()` we obtain the underlying object, its **base type**, here an integer vector 
 
 ```{r}
-species_no <- unclass(penguins$species)
-class(species_no)
-unique(species_no)
-attributes(species_no)
+species_no_class <- unclass(penguins$species)
+class(species_no_class)
+unique(species_no_class)
+attributes(species_no_class)
+```
+## OO type vs base type when passed to generic
+
+```{r}
+f <- factor(c("a", "b", "c"))
+print(f)
+print(unclass(f))
 ```
 
+## generic as middleman
+
+> The generic is the middleman: its job is to define the interface (i.e. the arguments) then find the right implementation for the job. The implementation for a specific class is called a **method**, and the generic finds that method by performing **method dispatch**.
+
+Hadley Wickham, Advanced R (2e)
+
+## Naming scheme
+
+S3 methods are functions with a special naming scheme, `generic.class()`. For example, the `factor` method for the `print()` generic is called `print.factor()`.
+
+You should never call the method directly, but instead rely on the generic to find it for you.
+
+. . . 
+
+:::{.callout-tip}
+This is why it is not considered best practice to use `.` when naming your own functions.
+:::
+
+. . .
+
+:::{.callout-warning}
+Lots of important R functions that are **not** methods *do* have `.` in the title -- these are from before S3.
+:::
+
+::: {.notes}
+e.g.
+data.frame()
+row.names()
+:::
+
+## Creating OO objects
+
+To make an object an instance of a class, you simply set the **class attribute**.
+
+(S3 has no formal definition of a class).
+
 ## Creating an S3 object with `stucture()`
+
 You can use `structure()` to define an S3 object with a class attribute:
 
 ```{r}
@@ -129,6 +273,47 @@ class(pi2dp) <- "pi_trunc"
 pi2dp
 ```
 
+## Warning!
+
+S3 has no checks for correctness, so we can change the class of objects. 
+
+**This is a bad idea!**
+
+```{r error = TRUE}
+mod <- lm(flipper_length_mm ~ bill_length_mm, data = penguins)
+class(mod)
+class(mod) <- "Date"
+print(mod)
+```
+
+. . .
+
+> R doesn't stop you from shooting yourself in the foot, but as long as you don't aim the gun at your toes and pull the trigger, you won't have a problem.
+
+## Creating your own classes
+
+All objects of the same class should have the same structure, i.e. same base type and same attributes.
+
+Recommend that you create:
+
+- a low-level **constructor**, `new_myclass()`, that efficiently creates objects with the correct structure
+- A **validator**, `validate_myclass()` that performs more computationally expensive checks to ensure the object has correct values
+- A user-friendly **helper**, `myclass()`, that provides a convenient way for others to create objects of your class.
+
+See <https://adv-r.hadley.nz/s3.html#s3-classes> for more details.
+
+## print generic
+
+```{r}
+print(pi2dp)
+```
+
+:::{.notes}
+See what happens before we define a custom print method later
+
+Prints like a list along with the attribute
+:::
+
 ## S3 generic functions
 
 S3 generic functions are simple wrappers to `UseMethod()`
@@ -147,21 +332,28 @@ class(penguins$species[1:3])
 print(penguins$species[1:3])
 ```
 
-Here `print()` dispatches to the method `print.factor()`.
+Here `print()` dispatches to the method `print.factor()`. 
 
-## Inheritance
+## `s3_dispatch()`
 
-The class of an S3 object can be a vector of classes
+`UseMethod()` creates a vector of method names then looks for each potential method in turn. We can see this with `sloop::s3_dispatch()`:
+
 ```{r}
-fit <- glm(y ~ x, data = data.frame(y = 1:3, x = 4:6))
-class(fit)
+s3_dispatch(print(penguins$species))
 ```
-We say `fit` is a `"glm"` object that _inherits_ from class `"lm"`.
 
-The `inherits()` function can be used to test if an object inherits from a given class
+- `=>` indicates the method that is called here.
+- `*` indicated a method that is defined, but not called.
+
+## `default`
+
+`default` is a special **pseudo-class** that provides a fallback whenever a class-specific method is not available.
+
 ```{r}
-inherits(fit, "glm")
+s3_dispatch(print(pi2dp))
 ```
+
+`print.pi_trunc` is not defined.
 
 ## Method dispatch
 
@@ -175,34 +367,53 @@ If no methods are defined for any of class, the default is used , e.g. `print.de
 
 If there is no default, an error is thrown.
 
-## S3 Methods
+## S3 methods for a class
 
-See the methods for a given S3 class
+See the methods for a given S3 class:
+
 ```{r}
 # nls is nonlinear least squares
 methods(class = "nls")
 ```
+. . . 
 
-See the methods for a given generic function
+```{r}
+s3_methods_class("nls") |> head()
+```
+
+## S3 methods for a generic
+
+See the methods for a given generic function:
 
 ```{r}
 methods("coef")
 ```
-
 Asterisked methods are not exported.
 
+. . .
 
+```{r}
+s3_methods_generic("coef")
+```
 
 ## View S3 methods
 
 S3 methods need not be in the same package as the generic.
 
-Find an unexported method with `getS3method()`
+Find an unexported method with `getS3method()` or `sloop::s3_get_method()`
 
 ```{r}
 getS3method("coef", "default")
 ```
-In code, call the generic, rather than calling the method directly.
+```{r}
+#| eval: false
+s3_get_method("coef.default") # equivalent
+```
+
+
+::: {.notes}
+Can view code for exported functions by just typing the function name, or, in RStudio, using `View(function_name)`  
+:::
 
 ## Writing S3 Methods
 
@@ -211,6 +422,8 @@ The arguments of a new method should be a superset of the arguments of the gener
 ```{r}
 args(print)
 ```
+
+. . .
 
 New methods have the name format `generic.class`:
 
@@ -222,18 +435,203 @@ print.pi_trunc <- function(x, abbreviate = TRUE, ...){
 print(pi2dp)
 ```
 
+. . . 
+
+```{r}
+print(pi2dp, abbreviate = FALSE)
+```
+
+::: {.notes}
+Note the difference compared to calling `print(pi2dp)` before.
+:::
+
+## Inheritance
+
+S3 classes can share behaviour through a mechanism called **inheritance**. Inheritance is powered by three ideas.
+
+- The class can be a character *vector*
+
+- If a method is not found for the class in the first element of the vector, R looks for a method in the second class (and so on)
+
+- A method can delegate work by calling `NextMethod()`.
+
+## Multiple classes
+
+The class of an S3 object can be a vector of classes: 
+
+```{r}
+fit <- glm(y ~ x, data = data.frame(y = 1:3, x = 4:6))
+class(fit)
+```
+We say `fit` is a `"glm"` object that **inherits** from class `"lm"`.
+
+- `glm` is a **subclass** of `lm`, because it always appears before it in the class vector.
+
+- `lm` is a **superclass** of `glm`.
+
+::: {.notes}
+Good practice:
+
+- base type of the subclass should be the same as the superclass
+
+- attributes of the subclass should be a superset of the attributes of the superclass.
+
+These practices are not enforced. These are recommendations in Advanced R for make life easier.  
+:::
+
+## `inherits()`
+
+The `inherits()` function can be used to test if an object inherits from a given class:
+
+```{r}
+inherits(fit, "glm")
+inherits(fit, "lm")
+inherits(fit, "xlm")
+```
+
+
+## Your turn (part 1)
+
+```{r}
+#| echo: false
+ols <- function(x, y, ...){
+  fit <- lm(y ~ x, data =  data.frame(x = x, y = y))
+  class(fit) <- c("ols", class(fit))
+  fit
+}
+
+print.ols <- function(x, ...){
+  cat("Intercept: ", coef(x)[1], "\n")
+  cat("Slope: ", coef(x)[2], "\n")
+}
+```
+
+1. Create a function to fit an ordinary least squares model given a response `y` and an explanatory variable `x`, that returns an object of a new class `"ols"`, that inherits from `"lm"`.
+
+2. Define a print method for your function that it works as follows:
+
+```{r}
+set.seed(1)
+res <- ols(x = 1:3, y = rnorm(3))
+res
+```
+
+Note: I have set `options(digits = 4)` to limit the number of digits printed by default throughout this presentation (default is 7).
+
+
 ## `NextMethod()`
 
-We can explicitly call the next method that would be called by `UseMethod()` to reuse code whilst customising as required
-```{r}
-body(t.data.frame)
-```
+Hard to understand, so here's a concrete example for the common use case: `[`.
 
 ```{r}
-body(rep.factor)
+new_secret <- function(x = double()) {
+  stopifnot(is.double(x))
+  structure(x, class = "secret")
+}
+
+print.secret <- function(x, ...) {
+  print(strrep("x", nchar(x)))
+  invisible(x)
+}
+
+x <- new_secret(c(15, 1, 456))
+x
 ```
 
-It is possible to call `NextMethod()` with arguments but it is safer to recall the generic with new arguments in this case.
+::: {.notes}
+?`[`
+:::
+
+## But there's a problem
+
+```{r}
+x[1]
+```
+
+We want this to be secret!
+. . . 
+
+The default `[` method doesn't preserve the class.
+
+```{r}
+s3_dispatch(x[1])
+```
+
+::: {.notes}
+There's no `[.default` defined (no `*` next to it), just an internal generic. We'll learn more about those later.  
+:::
+
+## A first attempt at a solution
+
+So, need to defined a `[.secret` method. 
+
+But the following doesn't work:
+
+```{r error = TRUE}
+`[.secret` <- function(x, i) {
+  new_secret(x[i])
+}
+x[1]
+```
+
+It gets stuck in infinite loop.
+
+
+::: {.notes}
+Trying to subset `x` then call new_secret on it, to give it the `secret` class, so that `print.secret` works on said subset.  
+:::
+
+## What's the fix?
+
+We need some way of calling the underlying `[` code, i.e. the implementation that would get called if we didn't have a `[.secret` method.
+
+```{r}
+`[.secret` <- function(x, i) {
+  new_secret(NextMethod())
+}
+x[1]
+```
+
+. . . 
+
+i.e. we're defining `[.secret` but we still want to access the internal `[` method (so we don't get stuck in a loop) as if `[.secret` wasn't defined.
+
+
+## Delegation with `NextMethod()`
+
+```{r}
+s3_dispatch(x[1])
+```
+
+The `=>` indicates that `[.secret` is called, but that `NextMethod()` delegates work to the underlying internal `[` method, as shown by `->`.
+
+
+## Another `NextMethod()` example
+
+```{r}
+data <- data.frame(x = 1:3, y = 4:6)
+class(data)
+data
+t(data)
+```
+
+::: {.notes}
+`t()` is the transpose function. 
+We started with a data.frame but after calling `t` on it, we have a matrix. What happened?
+:::
+
+## Underlying code
+
+```{r}
+t.data.frame
+```
+```{r}
+s3_dispatch(t(data))
+```
+
+. . .
+
+We can explicitly call the next method that would be called by `UseMethod()` to reuse code whilst customising as required.
 
 :::{.notes}
 We have seen that `UseMethod()` will dispatch to the method of the next class in the class vector if a method is not defined for the first class.
@@ -241,26 +639,40 @@ We have seen that `UseMethod()` will dispatch to the method of the next class in
 
 ## Implicit classes
 
-`is.object()` can be used to find out if an object has a class (S3/S4/R6)
+As we've seen, `is.object()` or `sloop::otype()` can be used to find out if an object has a class (S3/S4/R6)
+
 ```{r}
 is.object(factor(1:3))
 is.object(1:3)
 ```
 
-An object that does not have an explicit class has an implicit class that will be used for S3 method dispatch. The implicit class can be found with `.class2()`
+An object that does not have an explicit class has an implicit class that will be used for S3 method dispatch. 
+
+## Implicit classes and dispatch
+
+The implicit class can be found with `.class2()`, or `sloop::s3_class()`
+
 ```{r}
 M <- matrix(1:12, nrow = 4)
 attr(M, "class")
 .class2(M)
+s3_class(M)
+```
+
+The `class()` of an object does not uniquely determine its dispatch:
+
+```{r}
+s3_dispatch(print(M))
 ```
 
 :::{.notes}
-.class2 since R 4.0.0
+.class2 since R 4.0.0. 
 :::
 
 ## Attributes
 :::{.smaller90}
 We can take advantage of existing S3 methods by returning an object of a existing S3 class or an implicit class, using attributes to add custom information
+
 ```{r}
 x <- matrix(c(1:5, 2*(1:5)), ncol = 2)
 center_x <- scale(x, scale = FALSE)
@@ -274,28 +686,27 @@ attr(center_x, "scaled:center")
 This can avoid the need to define new classes and methods, in simple cases.
 :::
 
-## Your turn (part 1)
+::: {.notes}
+`attr(x, "scaled:center")` in `NULL`
+
+`center_x` is still a matrix, and so `summary(center_x)` dispatches to `summary.matrix`. We can take advantage of the methods for `matrix`, without needing to define a new class for `scaled`.
+:::
+
+## Under the hood
+
 ```{r}
-#| echo: false
-ols <- function(x, y, ...){
-  fit <- lm(y ~ x, data =  data.frame(x = x, y = y))
-  class(fit) <- c("ols", class(fit))
-  fit
-}
-print.ols <- function(x, ...){
-  cat("Intercept: ", coef(x)[1], "\n")
-  cat("Slope: ", coef(x)[2], "\n")
-}
+s3_dispatch(scale(x, scale = FALSE))
 ```
-1. Create a function to fit an ordinary least squares model given a response `y` and an explanatory variable `x`, that returns an object of a new class `"ols"`, that inherits from `"lm"`.
-2. Define a print method for your function that it works as follows:
 ```{r}
-set.seed(1)
-res <- ols(x = 1:3, y = rnorm(3))
-res
+s3_dispatch(summary(center_x))
+```
+```{r eval = FALSE}
+View(scale.default)
 ```
 
-Note: I have set `options(digits = 4)` to limit the number of digits printed by default throughout this presentation (default is 7).
+. . .
+
+In `scale.default()` the attribute `"scaled:center"` is added to the `x` argument, so essentially, `center_x` is a matrix with extra information (in this case, the colMeans of the original columns).
 
 ## Your turn (part 2)
 
@@ -317,6 +728,7 @@ print.summary.ols <- function(x, ...){
 ```
 
 3. Write a summary method for your `ols` class that uses `NextMethod()` to compute the usual `lm` summary, but return an object of class `"summary.ols"`. 
+
 4. Write a print method for the `"summary.ols"` which works as follows:
 
 ```{r}
@@ -327,341 +739,42 @@ summary(res)
 will get issues with inheriting e.g. add1 method
 :::
 
+# Other OOP systems {.inverse}
 
-# S4 {.inverse}
+## S4
 
-## Overview of S4
+S4 provides a formal approach to OOP. Its implementation is much stricter than S3.
 
-S4 methods
+S4 has **slots**, a named component of the object accessed with `@`.
+
+S4 methods:
 
  - use specialised functions for creating classes, generics and methods
  - allow _multiple inheritance_: a class can have multiple parents
  - allow _multiple dispatch_: method selection based on the class of multiple objects
- 
-The **methods** package provides the functions required to use S4 classes and methods, so always load this package when using S4.
 
 :::{.notes}
 use import instead
+
+The **methods** package provides the functions required to use S4 classes and methods, so always load this package when using S4.
 :::
 
-## S4 Classes
+## S4 uses
 
-An S4 class can be defined with `setClass()`, with at least two arguments
+- S4 is the OOP system used for bioconductor packages
+- The **Matrix** package
 
- - A **name**, by convention in `UpperCamelCase`.
- - A named character vector specifying the names and classes of the **slots** (fields). Using the pseudo class `ANY` allows a slot to accept any type of object.
- 
-```{r}
-setClass("Person", 
-  slots = c(
-    name = "character", 
-    date_of_birth = "Date",
-    date_of_death = "Date",
-    age_at_death = "numeric"
-  )
-)
-```
+## R6
 
-## Creating a new instance
+- The R6 OOP system is defined in the **R6** package: <https://r6.r-lib.org>
+- Encapsulated OOP, similar to OOP systems in other languages
+- The Advanced R book cautions against using R6 - it leads to non-idiomatic R code.
 
-A new instance of the S4 object can be created using `new()`
+## S7
 
-```{r}
-florence <- new("Person", 
-                name = "Florence Nightingale",
-                date_of_birth = as.Date("1820-05-12"),
-                date_of_death = as.Date("1910-08-13"),
-                age_at_death = 90)
-str(florence)
-```
-
-Note that the second onwards argument names in `new` are the names in the vector passed to `slots()` when defining the class.
-
-## Examining S4 objects
-
-Find the type of S4 class
-```{r}
-is.object(florence)
-isS4(florence)
-.class2(florence)
-```
-
-Extract the value of a slot (use @)
-```{r}
-getSlots("Person")
-florence@age_at_death # or slot(florence, "age_at_death")
-```
-
-:::{.notes}
-class() will only show class itself, not classes it inherits from
-:::
-
-## Prototype
-
-The `prototype` argument can be used to specify default values, enabling partial specification
-
-```{r}
-setClass("Person", 
-  slots = c(
-    name = "character", 
-    date_of_birth = "Date",
-    date_of_death = "Date",
-    age_at_death = "numeric"
-  ),
-  prototype = list(
-    name = NA_character_, 
-    date_of_birth = as.Date(NA),
-    date_of_death = as.Date(NA),
-    age_at_death = NA_real_
-  )
-)
-```
-
-Be sure to use `list()` not `c()` for `prototype` -- easy mistake to make!
-
-## `initialize()`
-
-An `initialize()` method can be used for more control over initialization
-
-:::{.smaller90}
-```{r}
-setMethod("initialize", "Person", 
-  function(.Object, ...) {
-    # initialize with default method 
-    # (named arguments override defaults)
-    .Object <- callNextMethod(.Object, ...)
-    
-    # compute age at death if not specified
-    year <- function(x) as.numeric(format(x, "%Y"))
-    m_day <- function(x) as.numeric(format(x, "%m%d"))
-    
-    if (is.na(.Object@age_at_death)){
-      n_year <- year(.Object@date_of_death) - year(.Object@date_of_birth)
-      birthday <- m_day(.Object@date_of_death) >= m_day(.Object@date_of_birth)
-      .Object@age_at_death <- n_year - !birthday
-    }
-    .Object
-  })
-```
-:::
-
-## Creating a new S4 obect from an old one
-
-```{r}
-florence <- new("Person", 
-                name = "Florence Nightingale",
-                date_of_birth = as.Date("1820-05-12"))
-str(florence)
-```
-
-```{r}
-florence <- initialize(florence, 
-                       date_of_death = as.Date("1910-08-13")) 
-str(florence)
-```
-
-## Inheritance
-
-The `contains` argument to `setClass()` specifies a class or classes to inherit slots and behaviour from
-
-```{r}
-setClass("BanknoteCharacter", 
-  contains = "Person", 
-  slots = c(
-    denomination = "numeric",
-    first_issue = "Date",
-    last_legal = "Date"
-  ),
-  prototype = list(
-    denomination = NA_real_,
-    first_issue = as.Date(NA),
-    last_legal = as.Date(NA)
-  )
-)
-```
-
-## New instance of subclass
-
-Creating a new instance of the subclass will fill in the slots of the superclass
-
-```{r}
-seriesD_10GBP <- new("BanknoteCharacter", 
-                     name = "Florence Nightingale", 
-                     date_of_birth = as.Date("1820-05-12"), 
-                     date_of_death = as.Date("1910-08-12"))
-str(seriesD_10GBP)
-```
-## Show defined S4 Class
-
-Use `showClass()` to show (print) an S4 Class
-
-```{r}
-showClass("Person")
-```
-
-## Helper function
-
-If a user is to create these objects, define a helper function named by the class
-
-```{r}
-Person <- function(name = NA, date_of_birth = NA, date_of_death = NA) {
-  new("Person", 
-      name = as.character(name), 
-      date_of_birth = as.Date(date_of_birth), 
-      date_of_death = as.Date(date_of_death))
-}
-```
-
-```{r}
-ada <- Person("Ada Lovelace", "1815-12-10", "1852-11-27")
-str(ada)
-```
-
-
-::: {.notes}
-Put computation in the `initialize` method where possible, so that it can be reused by subclasses.
-:::
-
-
-## Validator function
-
-Use `setValidity()` to check constraints beyond data type, e.g. that all slots have the same length
-```{r, results = "hide"}
-setValidity("Person", function(object) {
-  len <- vapply(slotNames("Person"), 
-                function(x) length(slot(object, x)),
-                numeric(1))
-  if (!all(len == len[1])){
-    "slots should all be the same length"
-  } else {
-    TRUE
-  }
-})
-```
-
-```{r, error = TRUE}
-Person(name = c("Ada Lovelace", "Grace Hopper"), 
-       date_of_birth = "1815-12-10")
-```
-
-## S4 generic functions
-
-S4 generic functions are (usually) a wrapper to `standardGeneric()`, e.g.
-
-```{r}
-getGeneric("kronecker")
-```
-
-By default, all arguments apart from `...` are used for method dispatch.
-
-
-## Writing S4 generic functions
-
-Use `setGeneric` to define a new generic, with the optional `signature` argument to specify the arguments to use for method dispatch
-
-```{r}
-setGeneric("myGeneric", 
-  function(x, ..., verbose = TRUE) standardGeneric("myGeneric"),
-  signature = "x"
-)
-```
-
-Do not use `{}` in the function definition here.
-
-S4 generics use `lowerCamelCase` names by convention.
-
-## S4 Methods
-
-S4 methods for a generic function are defined with `setMethod()`, which takes three main arguments
-
- - The **name** of the generic function.
- - The **signature** specifying the classes for one or more of the arguments used  for method dispatch
- - The method, defined as a function with a superset of the arguments of the generic
-
-## Writing S4 Methods
-
-```{r}
-args(getGeneric("show"))
-```
-
-```{r}
-setMethod("show", "Person", function(object) {
-  cat(object@name, "\n",
-      "Born: ", format(object@date_of_birth, "%d %B %Y"), "\n",
-      "Died: ", format(object@date_of_death, "%d %B %Y"), 
-                " (aged ", object@age_at_death, ")\n",
-      sep = "")
-})
-florence
-```
-
-## Accessor generics
-
-It is good practice to define generics to get and set slots that the user should have access to.
-
-For example, a generic to get and set the date of birth
-
-```{r}
-setGeneric("dob", function(x) standardGeneric("dob"))
-setGeneric("dob<-", function(x, value) standardGeneric("dob<-"))
-```
-
-## Accessor methods
-
-Methods can then be defined for multiple classes using the same interface.
-
-Access the date of birth from a Person object
-```{r}
-setMethod("dob", "Person", function(x) x@date_of_birth)
-dob(florence)
-```
-
-Change the date of birth
-```{r}
-setMethod("dob<-", "Person", function(x, value) {
-  x@date_of_birth <- as.Date(value)
-  validObject(x)
-  x
-})
-dob(florence) <- "1820-05-11"
-dob(florence)
-```
-
-## Method dispatch
-
-* One argument, single inheritance along vector of classes:
-    - Same as for S3
-* One argument, multiple inheritance:
-    - Follow all possible paths from child class to parent classes
-    - Dispatch to first method found with the shortest path
-* Multiple dispatch 
-    - As multiple inheritance, but follow possible paths for multiple arguments
-    
-Keep it simple: dispatch on one or two arguments usually sufficient.
-
-Avoid ambiguous cases by defining methods earlier in path.
-
-## Pseudo-classes
-
-Methods can be defined for the `ANY` pseudo-class
-
- - Only selected if no method found for real classes
- 
-The `MISSING` pseudo-class is useful for dispatch on two arguments: allow different behaviour if only one argument specified.
-
-## Your turn
-
-:::{.smaller80}
-1. Create an S4 class `Diag` to represent a diagonal matrix with two slots:
- - `n` the number of rows/cols
- - `x` the numeric values of the diagonal elements
-    
-    Add a prototype to specify default values.
-2. Test your class by creating a new instance first without providing any values for the slots and then providing some example values.
-3. Create an `initialize` method so that the `n` slot is computed automatically and does not have to be provided.
-4. Create a `Diag()` helper function to create a new `Diag` object, with the user only having to specify the diagonal elements.
-5. Create a `show` method to state the size of the matrix and print the diagonal elements.
-:::
+- Currently in the **S7** package: <https://rconsortium.github.io/S7/>
+- Will eventually be incorporated into R as the successor S3 and S4. 
+- An example of using S7 for generative art: <https://blog.djnavarro.net/posts/2024-02-25_s7/>
 
 # End matter {.inverse}
 

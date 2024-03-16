@@ -26,3 +26,9 @@ Wickham, H, _Advanced R_ (2nd edn), _Object-oriented programming_ section
 - Fun example creating `Turtle` and `TurtleWithPen` classes to create simple graphics by moving the turtle
 
   <https://stuartlee.org/2019/07/09/s4-short-guide/> 
+
+### Packages
+
+- **sloop**
+
+  <https://sloop.r-lib.org>
