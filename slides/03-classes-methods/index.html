@@ -418,8 +418,14 @@ Department of Statistics, University of Warwick
 <ul>
 <li>Object-oriented programming</li>
 <li>S3</li>
-<li>S4</li>
+<li>Other OOP systems (S4, R6, S7)</li>
 </ul>
+</section>
+<section id="source-material" class="slide level2">
+<h2>Source material</h2>
+<p>This material is largely based on Chapters 12 and 13 of Advanced R, 2nd edition, by Hadley Wickham.</p>
+<p>The book is freely available online: <a href="https://adv-r.hadley.nz" class="uri">https://adv-r.hadley.nz</a>.</p>
+<p>It is shared under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
 </section>
 <section>
 <section id="object-oriented-programming" class="title-slide slide level1 inverse center">
@@ -428,6 +434,40 @@ Department of Statistics, University of Warwick
 </section>
 <section id="object-oriented-programming-oop" class="slide level2">
 <h2>Object-oriented programming (OOP)</h2>
+<p>With OOP, a developer can consider a function’s interface separately from its implementation.</p>
+<p>This makes it possible to use the same function for different types of input.</p>
+<p>These are called <strong>generic</strong> functions.</p>
+</section>
+<section id="oop-definitions" class="slide level2">
+<h2>OOP definitions</h2>
+<ul>
+<li><p>OO systems call the type of an object its <strong>class</strong>.</p></li>
+<li><p>An implementation for a specific class is called a <strong>method</strong>.</p></li>
+<li><p>The class defines the <strong>fields</strong>, the data possessed by every instance of that class.</p></li>
+</ul>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Roughly speaking, a class defines what an object <em>is</em> and methods define what an object can <em>do</em>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="oop-definitions-continued" class="slide level2">
+<h2>OOP definitions (continued)</h2>
+<ul>
+<li><p>Classes are organised in a hierarchy, so that if a method does not exist for one class, its parent’s method is used.</p></li>
+<li><p>The child is said to <strong>inherit</strong> behaviour.</p></li>
+<li><p>The process of finding the correct method given a class is called <strong>method dispatch</strong>.</p></li>
+</ul>
+</section>
+<section id="generic-functions" class="slide level2">
+<h2>Generic functions</h2>
 <p><strong>Generic</strong> functions provide a unified interface to <strong>methods</strong> for objects of a particular <strong>class</strong>, e.g.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -501,6 +541,110 @@ Department of Statistics, University of Warwick
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="sloop" class="slide level2">
+<h2>sloop</h2>
+<p>The <strong>sloop</strong> package provides tools to help you interactively explore and understand object oriented programming in R, particularly with S3.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(sloop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="objects" class="slide level2">
+<h2>Objects</h2>
+<p>In R, we can distinguish between <strong>base objects</strong> and <strong>OO objects</strong>.</p>
+<p>A base object:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">is.object</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>sloop<span class="sc">::</span><span class="fu">otype</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "base"</code></pre>
+</div>
+</div>
+<p>An OO object:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">is.object</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>sloop<span class="sc">::</span><span class="fu">otype</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "S3"</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Everything in R is an object, but not everything is object-oriented.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="classes" class="slide level2">
+<h2>Classes</h2>
+<p>Techincally, the difference between base and OO objects is that OO objects have a <strong>class</strong> attribute:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">attr</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">attr</span>(penguins, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="base-types" class="slide level2">
+<h2>Base types</h2>
+<p>Only OO objects have a class attribute, but every object has a <strong>base type</strong>.</p>
+<p>There are 25 different base types, e.g.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">typeof</span>(<span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NULL"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">typeof</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">typeof</span>(<span class="dv">1</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">typeof</span>(<span class="st">"hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</section>
+<section id="object-of-type-closure-is-not-subsettable" class="slide level2">
+<h2>“object of type ‘closure’ is not subsettable”</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">typeof</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "closure"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>mean[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in mean[1]: object of type 'closure' is not subsettable</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Jenny Bryan’s talk on debugging:</p>
+<p><a href="https://posit.co/resources/videos/object-of-type-closure-is-not-subsettable/" class="uri">https://posit.co/resources/videos/object-of-type-closure-is-not-subsettable/</a></p>
+</div>
 </section></section>
 <section>
 <section id="s3" class="title-slide slide level1 inverse center">
@@ -511,11 +655,11 @@ Department of Statistics, University of Warwick
 <h2>S3 objects</h2>
 <p>An S3 object has a <code>"class"</code> attribute:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">attr</span>(penguins<span class="sc">$</span>species, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">attr</span>(penguins<span class="sc">$</span>species, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">unique</span>(penguins<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">unique</span>(penguins<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Adelie    Gentoo    Chinstrap
 Levels: Adelie Chinstrap Gentoo</code></pre>
@@ -524,31 +668,102 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 </section>
 <section id="s3-objects-the-underlying-object" class="slide level2">
 <h2>S3 objects: the underlying object</h2>
-<p>With <code>unclass()</code> we obtain the underlying object, here an integer vector</p>
+<p>With <code>unclass()</code> we obtain the underlying object, its <strong>base type</strong>, here an integer vector</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>species_no <span class="ot">&lt;-</span> <span class="fu">unclass</span>(penguins<span class="sc">$</span>species)</span>
-<span id="cb10-2"><a></a><span class="fu">class</span>(species_no)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>species_no_class <span class="ot">&lt;-</span> <span class="fu">unclass</span>(penguins<span class="sc">$</span>species)</span>
+<span id="cb37-2"><a></a><span class="fu">class</span>(species_no_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">unique</span>(species_no)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">unique</span>(species_no_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 3 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">attributes</span>(species_no)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">attributes</span>(species_no_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$levels
 [1] "Adelie"    "Chinstrap" "Gentoo"   </code></pre>
 </div>
 </div>
 </section>
+<section id="oo-type-vs-base-type-when-passed-to-generic" class="slide level2">
+<h2>OO type vs base type when passed to generic</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb43-2"><a></a><span class="fu">print</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: a b c</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">print</span>(<span class="fu">unclass</span>(f))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3
+attr(,"levels")
+[1] "a" "b" "c"</code></pre>
+</div>
+</div>
+</section>
+<section id="generic-as-middleman" class="slide level2">
+<h2>generic as middleman</h2>
+<blockquote>
+<p>The generic is the middleman: its job is to define the interface (i.e.&nbsp;the arguments) then find the right implementation for the job. The implementation for a specific class is called a <strong>method</strong>, and the generic finds that method by performing <strong>method dispatch</strong>.</p>
+</blockquote>
+<p>Hadley Wickham, Advanced R (2e)</p>
+</section>
+<section id="naming-scheme" class="slide level2">
+<h2>Naming scheme</h2>
+<p>S3 methods are functions with a special naming scheme, <code>generic.class()</code>. For example, the <code>factor</code> method for the <code>print()</code> generic is called <code>print.factor()</code>.</p>
+<p>You should never call the method directly, but instead rely on the generic to find it for you.</p>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>This is why it is not considered best practice to use <code>.</code> when naming your own functions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Lots of important R functions that are <strong>not</strong> methods <em>do</em> have <code>.</code> in the title – these are from before S3.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>e.g. data.frame() row.names()</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="creating-oo-objects" class="slide level2">
+<h2>Creating OO objects</h2>
+<p>To make an object an instance of a class, you simply set the <strong>class attribute</strong>.</p>
+<p>(S3 has no formal definition of a class).</p>
+</section>
 <section id="creating-an-s3-object-with-stucture" class="slide level2">
 <h2>Creating an S3 object with <code>stucture()</code></h2>
 <p>You can use <code>structure()</code> to define an S3 object with a class attribute:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>dp <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb16-2"><a></a><span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">pi =</span> <span class="fu">trunc</span>(<span class="dv">10</span><span class="sc">^</span>dp <span class="sc">*</span> pi)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>dp, <span class="at">dp =</span> dp),</span>
-<span id="cb16-3"><a></a>          <span class="at">class =</span> <span class="st">"pi_trunc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>dp <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb47-2"><a></a><span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">pi =</span> <span class="fu">trunc</span>(<span class="dv">10</span><span class="sc">^</span>dp <span class="sc">*</span> pi)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>dp, <span class="at">dp =</span> dp),</span>
+<span id="cb47-3"><a></a>          <span class="at">class =</span> <span class="st">"pi_trunc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$pi
 [1] 3.14
@@ -566,9 +781,9 @@ attr(,"class")
 <h2>Creating an S3 object with <code>class()</code></h2>
 <p>Alternatively, we can add a class attribute using the <code>class()</code> helper function:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>pi2dp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">pi =</span> <span class="fu">trunc</span>(<span class="dv">10</span><span class="sc">^</span>dp <span class="sc">*</span> pi)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>dp, <span class="at">dp =</span> dp)</span>
-<span id="cb18-2"><a></a><span class="fu">class</span>(pi2dp) <span class="ot">&lt;-</span> <span class="st">"pi_trunc"</span></span>
-<span id="cb18-3"><a></a>pi2dp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>pi2dp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">pi =</span> <span class="fu">trunc</span>(<span class="dv">10</span><span class="sc">^</span>dp <span class="sc">*</span> pi)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>dp, <span class="at">dp =</span> dp)</span>
+<span id="cb49-2"><a></a><span class="fu">class</span>(pi2dp) <span class="ot">&lt;-</span> <span class="st">"pi_trunc"</span></span>
+<span id="cb49-3"><a></a>pi2dp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$pi
 [1] 3.14
@@ -581,15 +796,78 @@ attr(,"class")
 </div>
 </div>
 </section>
+<section id="warning" class="slide level2">
+<h2>Warning!</h2>
+<p>S3 has no checks for correctness, so we can change the class of objects.</p>
+<p><strong>This is a bad idea!</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(flipper_length_mm <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> penguins)</span>
+<span id="cb51-2"><a></a><span class="fu">class</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "lm"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">class</span>(mod) <span class="ot">&lt;-</span> <span class="st">"Date"</span></span>
+<span id="cb53-2"><a></a><span class="fu">print</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in as.POSIXlt(.Internal(Date2POSIXlt(x, tz)), tz = tz): 'list' object cannot be coerced to type 'double'</code></pre>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>R doesn’t stop you from shooting yourself in the foot, but as long as you don’t aim the gun at your toes and pull the trigger, you won’t have a problem.</p>
+</blockquote>
+</div>
+</section>
+<section id="creating-your-own-classes" class="slide level2">
+<h2>Creating your own classes</h2>
+<p>All objects of the same class should have the same structure, i.e.&nbsp;same base type and same attributes.</p>
+<p>Recommend that you create:</p>
+<ul>
+<li>a low-level <strong>constructor</strong>, <code>new_myclass()</code>, that efficiently creates objects with the correct structure</li>
+<li>A <strong>validator</strong>, <code>validate_myclass()</code> that performs more computationally expensive checks to ensure the object has correct values</li>
+<li>A user-friendly <strong>helper</strong>, <code>myclass()</code>, that provides a convenient way for others to create objects of your class.</li>
+</ul>
+<p>See <a href="https://adv-r.hadley.nz/s3.html#s3-classes" class="uri">https://adv-r.hadley.nz/s3.html#s3-classes</a> for more details.</p>
+</section>
+<section id="print-generic" class="slide level2">
+<h2>print generic</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">print</span>(pi2dp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pi
+[1] 3.14
+
+$dp
+[1] 2
+
+attr(,"class")
+[1] "pi_trunc"</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>See what happens before we define a custom print method later</p>
+<p>Prints like a list along with the attribute</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="s3-generic-functions" class="slide level2">
 <h2>S3 generic functions</h2>
 <p>S3 generic functions are simple wrappers to <code>UseMethod()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("print")
-&lt;bytecode: 0x11a5bdaa8&gt;
+&lt;bytecode: 0x123f09ea8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -598,11 +876,11 @@ UseMethod("print")
 <h2><code>useMethod()</code></h2>
 <p>The <code>UseMethod()</code> function takes care of <em>method dispatch</em>: selecting the S3 method according to the class of the object passed as the first argument.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">class</span>(penguins<span class="sc">$</span>species[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">class</span>(penguins<span class="sc">$</span>species[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">print</span>(penguins<span class="sc">$</span>species[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">print</span>(penguins<span class="sc">$</span>species[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Adelie Adelie Adelie
 Levels: Adelie Chinstrap Gentoo</code></pre>
@@ -610,30 +888,38 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 </div>
 <p>Here <code>print()</code> dispatches to the method <code>print.factor()</code>.</p>
 </section>
-<section id="inheritance" class="slide level2">
-<h2>Inheritance</h2>
-<p>The class of an S3 object can be a vector of classes</p>
+<section id="s3_dispatch" class="slide level2">
+<h2><code>s3_dispatch()</code></h2>
+<p><code>UseMethod()</code> creates a vector of method names then looks for each potential method in turn. We can see this with <code>sloop::s3_dispatch()</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">x =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>))</span>
-<span id="cb26-2"><a></a><span class="fu">class</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">print</span>(penguins<span class="sc">$</span>species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "glm" "lm" </code></pre>
+<pre><code>=&gt; print.factor
+ * print.default</code></pre>
 </div>
 </div>
-<p>We say <code>fit</code> is a <code>"glm"</code> object that <em>inherits</em> from class <code>"lm"</code>.</p>
-<p>The <code>inherits()</code> function can be used to test if an object inherits from a given class</p>
+<ul>
+<li><code>=&gt;</code> indicates the method that is called here.</li>
+<li><code>*</code> indicated a method that is defined, but not called.</li>
+</ul>
+</section>
+<section id="default" class="slide level2">
+<h2><code>default</code></h2>
+<p><code>default</code> is a special <strong>pseudo-class</strong> that provides a fallback whenever a class-specific method is not available.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">inherits</span>(fit, <span class="st">"glm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">print</span>(pi2dp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>   print.pi_trunc
+=&gt; print.default</code></pre>
 </div>
 </div>
+<p><code>print.pi_trunc</code> is not defined.</p>
 </section>
 <section id="method-dispatch" class="slide level2">
 <h2>Method dispatch</h2>
 <p>An S3 object can have more than one class e.g.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">class</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="fu">class</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
@@ -642,12 +928,12 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <p>If no methods are defined for any of class, the default is used , e.g.&nbsp;<code>print.default()</code>.</p>
 <p>If there is no default, an error is thrown.</p>
 </section>
-<section id="s3-methods" class="slide level2">
-<h2>S3 Methods</h2>
-<p>See the methods for a given S3 class</p>
+<section id="s3-methods-for-a-class" class="slide level2">
+<h2>S3 methods for a class</h2>
+<p>See the methods for a given S3 class:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># nls is nonlinear least squares</span></span>
-<span id="cb32-2"><a></a><span class="fu">methods</span>(<span class="at">class =</span> <span class="st">"nls"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="co"># nls is nonlinear least squares</span></span>
+<span id="cb69-2"><a></a><span class="fu">methods</span>(<span class="at">class =</span> <span class="st">"nls"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] anova       coef        confint     deviance    df.residual fitted     
  [7] formula     logLik      nobs        predict     print       profile    
@@ -655,9 +941,28 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 see '?methods' for accessing help and source code</code></pre>
 </div>
 </div>
-<p>See the methods for a given generic function</p>
+<div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">methods</span>(<span class="st">"coef"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">s3_methods_class</span>(<span class="st">"nls"</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  generic     class visible source             
+  &lt;chr&gt;       &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;              
+1 anova       nls   FALSE   registered S3method
+2 coef        nls   FALSE   registered S3method
+3 confint     nls   FALSE   registered S3method
+4 deviance    nls   FALSE   registered S3method
+5 df.residual nls   FALSE   registered S3method
+6 fitted      nls   FALSE   registered S3method</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="s3-methods-for-a-generic" class="slide level2">
+<h2>S3 methods for a generic</h2>
+<p>See the methods for a given generic function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">methods</span>(<span class="st">"coef"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] coef.aov*     coef.Arima*   coef.default* coef.listof*  coef.maov*   
 [6] coef.nls*    
@@ -665,13 +970,29 @@ see '?methods' for accessing help and source code</code></pre>
 </div>
 </div>
 <p>Asterisked methods are not exported.</p>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a><span class="fu">s3_methods_generic</span>(<span class="st">"coef"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  generic class   visible source             
+  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;              
+1 coef    aov     FALSE   registered S3method
+2 coef    Arima   FALSE   registered S3method
+3 coef    default FALSE   registered S3method
+4 coef    listof  FALSE   registered S3method
+5 coef    maov    FALSE   registered S3method
+6 coef    nls     FALSE   registered S3method</code></pre>
+</div>
+</div>
+</div>
 </section>
 <section id="view-s3-methods" class="slide level2">
 <h2>View S3 methods</h2>
 <p>S3 methods need not be in the same package as the generic.</p>
-<p>Find an unexported method with <code>getS3method()</code></p>
+<p>Find an unexported method with <code>getS3method()</code> or <code>sloop::s3_get_method()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">getS3method</span>(<span class="st">"coef"</span>, <span class="st">"default"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">getS3method</span>(<span class="st">"coef"</span>, <span class="st">"default"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, complete = TRUE, ...) 
 {
@@ -680,56 +1001,328 @@ see '?methods' for accessing help and source code</code></pre>
         cf
     else cf[!is.na(cf)]
 }
-&lt;bytecode: 0x13a4d21c8&gt;
+&lt;bytecode: 0x11158e8d8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
-<p>In code, call the generic, rather than calling the method directly.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a><span class="fu">s3_get_method</span>(<span class="st">"coef.default"</span>) <span class="co"># equivalent</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Can view code for exported functions by just typing the function name, or, in RStudio, using <code>View(function_name)</code></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="writing-s3-methods" class="slide level2">
 <h2>Writing S3 Methods</h2>
 <p>The arguments of a new method should be a superset of the arguments of the generic</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">args</span>(print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a><span class="fu">args</span>(print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 NULL</code></pre>
 </div>
 </div>
+<div class="fragment">
 <p>New methods have the name format <code>generic.class</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>print.pi_trunc <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">abbreviate =</span> <span class="cn">TRUE</span>, ...){</span>
-<span id="cb40-2"><a></a>  dp_text <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(abbreviate, <span class="st">"d.p."</span>, <span class="st">"decimal places"</span>)</span>
-<span id="cb40-3"><a></a>  <span class="fu">cat</span>(<span class="st">"pi: "</span>, x<span class="sc">$</span>pi, <span class="st">" ("</span>, x<span class="sc">$</span>dp, <span class="st">" "</span>, dp_text, <span class="st">")"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb40-4"><a></a>}</span>
-<span id="cb40-5"><a></a><span class="fu">print</span>(pi2dp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a>print.pi_trunc <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">abbreviate =</span> <span class="cn">TRUE</span>, ...){</span>
+<span id="cb82-2"><a></a>  dp_text <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(abbreviate, <span class="st">"d.p."</span>, <span class="st">"decimal places"</span>)</span>
+<span id="cb82-3"><a></a>  <span class="fu">cat</span>(<span class="st">"pi: "</span>, x<span class="sc">$</span>pi, <span class="st">" ("</span>, x<span class="sc">$</span>dp, <span class="st">" "</span>, dp_text, <span class="st">")"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb82-4"><a></a>}</span>
+<span id="cb82-5"><a></a><span class="fu">print</span>(pi2dp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>pi: 3.14 (2 d.p.)</code></pre>
 </div>
 </div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a><span class="fu">print</span>(pi2dp, <span class="at">abbreviate =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pi: 3.14 (2 decimal places)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Note the difference compared to calling <code>print(pi2dp)</code> before.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="inheritance" class="slide level2">
+<h2>Inheritance</h2>
+<p>S3 classes can share behaviour through a mechanism called <strong>inheritance</strong>. Inheritance is powered by three ideas.</p>
+<ul>
+<li><p>The class can be a character <em>vector</em></p></li>
+<li><p>If a method is not found for the class in the first element of the vector, R looks for a method in the second class (and so on)</p></li>
+<li><p>A method can delegate work by calling <code>NextMethod()</code>.</p></li>
+</ul>
+</section>
+<section id="multiple-classes" class="slide level2">
+<h2>Multiple classes</h2>
+<p>The class of an S3 object can be a vector of classes:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">x =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>))</span>
+<span id="cb86-2"><a></a><span class="fu">class</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "glm" "lm" </code></pre>
+</div>
+</div>
+<p>We say <code>fit</code> is a <code>"glm"</code> object that <strong>inherits</strong> from class <code>"lm"</code>.</p>
+<ul>
+<li><p><code>glm</code> is a <strong>subclass</strong> of <code>lm</code>, because it always appears before it in the class vector.</p></li>
+<li><p><code>lm</code> is a <strong>superclass</strong> of <code>glm</code>.</p></li>
+</ul>
+<aside class="notes">
+<p>Good practice:</p>
+<ul>
+<li><p>base type of the subclass should be the same as the superclass</p></li>
+<li><p>attributes of the subclass should be a superset of the attributes of the superclass.</p></li>
+</ul>
+<p>These practices are not enforced. These are recommendations in Advanced R for make life easier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inherits" class="slide level2">
+<h2><code>inherits()</code></h2>
+<p>The <code>inherits()</code> function can be used to test if an object inherits from a given class:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a><span class="fu">inherits</span>(fit, <span class="st">"glm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a><span class="fu">inherits</span>(fit, <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a><span class="fu">inherits</span>(fit, <span class="st">"xlm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-part-1" class="slide level2">
+<h2>Your turn (part 1)</h2>
+<ol type="1">
+<li><p>Create a function to fit an ordinary least squares model given a response <code>y</code> and an explanatory variable <code>x</code>, that returns an object of a new class <code>"ols"</code>, that inherits from <code>"lm"</code>.</p></li>
+<li><p>Define a print method for your function that it works as follows:</p></li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb94-2"><a></a>res <span class="ot">&lt;-</span> <span class="fu">ols</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">3</span>))</span>
+<span id="cb94-3"><a></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intercept:  -0.217 
+Slope:  -0.1046 </code></pre>
+</div>
+</div>
+<p>Note: I have set <code>options(digits = 4)</code> to limit the number of digits printed by default throughout this presentation (default is 7).</p>
 </section>
 <section id="nextmethod" class="slide level2">
 <h2><code>NextMethod()</code></h2>
-<p>We can explicitly call the next method that would be called by <code>UseMethod()</code> to reuse code whilst customising as required</p>
+<p>Hard to understand, so here’s a concrete example for the common use case: <code>[</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">body</span>(t.data.frame)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a>new_secret <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="fu">double</span>()) {</span>
+<span id="cb96-2"><a></a>  <span class="fu">stopifnot</span>(<span class="fu">is.double</span>(x))</span>
+<span id="cb96-3"><a></a>  <span class="fu">structure</span>(x, <span class="at">class =</span> <span class="st">"secret"</span>)</span>
+<span id="cb96-4"><a></a>}</span>
+<span id="cb96-5"><a></a></span>
+<span id="cb96-6"><a></a>print.secret <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb96-7"><a></a>  <span class="fu">print</span>(<span class="fu">strrep</span>(<span class="st">"x"</span>, <span class="fu">nchar</span>(x)))</span>
+<span id="cb96-8"><a></a>  <span class="fu">invisible</span>(x)</span>
+<span id="cb96-9"><a></a>}</span>
+<span id="cb96-10"><a></a></span>
+<span id="cb96-11"><a></a>x <span class="ot">&lt;-</span> <span class="fu">new_secret</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">456</span>))</span>
+<span id="cb96-12"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{
+<pre><code>[1] "xx"  "x"   "xxx"</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>?<code>[</code></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="but-theres-a-problem" class="slide level2">
+<h2>But there’s a problem</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a>x[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>We want this to be secret! . . .</p>
+<p>The default <code>[</code> method doesn’t preserve the class.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a><span class="fu">s3_dispatch</span>(x[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   [.secret
+   [.default
+=&gt; [ (internal)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>There’s no <code>[.default</code> defined (no <code>*</code> next to it), just an internal generic. We’ll learn more about those later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-first-attempt-at-a-solution" class="slide level2">
+<h2>A first attempt at a solution</h2>
+<p>So, need to defined a <code>[.secret</code> method.</p>
+<p>But the following doesn’t work:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a><span class="st">`</span><span class="at">[.secret</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, i) {</span>
+<span id="cb102-2"><a></a>  <span class="fu">new_secret</span>(x[i])</span>
+<span id="cb102-3"><a></a>}</span>
+<span id="cb102-4"><a></a>x[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It gets stuck in infinite loop.</p>
+<aside class="notes">
+<p>Trying to subset <code>x</code> then call new_secret on it, to give it the <code>secret</code> class, so that <code>print.secret</code> works on said subset.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="whats-the-fix" class="slide level2">
+<h2>What’s the fix?</h2>
+<p>We need some way of calling the underlying <code>[</code> code, i.e.&nbsp;the implementation that would get called if we didn’t have a <code>[.secret</code> method.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a><span class="st">`</span><span class="at">[.secret</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, i) {</span>
+<span id="cb103-2"><a></a>  <span class="fu">new_secret</span>(<span class="fu">NextMethod</span>())</span>
+<span id="cb103-3"><a></a>}</span>
+<span id="cb103-4"><a></a>x[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "xx"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>i.e.&nbsp;we’re defining <code>[.secret</code> but we still want to access the internal <code>[</code> method (so we don’t get stuck in a loop) as if <code>[.secret</code> wasn’t defined.</p>
+</div>
+</section>
+<section id="delegation-with-nextmethod" class="slide level2">
+<h2>Delegation with <code>NextMethod()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a><span class="fu">s3_dispatch</span>(x[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=&gt; [.secret
+   [.default
+-&gt; [ (internal)</code></pre>
+</div>
+</div>
+<p>The <code>=&gt;</code> indicates that <code>[.secret</code> is called, but that <code>NextMethod()</code> delegates work to the underlying internal <code>[</code> method, as shown by <code>-&gt;</code>.</p>
+</section>
+<section id="another-nextmethod-example" class="slide level2">
+<h2>Another <code>NextMethod()</code> example</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb107-2"><a></a><span class="fu">class</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y
+1 1 4
+2 2 5
+3 3 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a><span class="fu">t</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [,1] [,2] [,3]
+x    1    2    3
+y    4    5    6</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p><code>t()</code> is the transpose function. We started with a data.frame but after calling <code>t</code> on it, we have a matrix. What happened?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="underlying-code" class="slide level2">
+<h2>Underlying code</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a></a>t.data.frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x) 
+{
     x &lt;- as.matrix(x)
     NextMethod("t")
-}</code></pre>
+}
+&lt;bytecode: 0x1172a2270&gt;
+&lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">body</span>(rep.factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">t</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{
-    y &lt;- NextMethod()
-    structure(y, class = class(x), levels = levels(x))
-}</code></pre>
+<pre><code>=&gt; t.data.frame
+-&gt; t.default</code></pre>
 </div>
 </div>
-<p>It is possible to call <code>NextMethod()</code> with arguments but it is safer to recall the generic with new arguments in this case.</p>
+<div class="fragment">
+<p>We can explicitly call the next method that would be called by <code>UseMethod()</code> to reuse code whilst customising as required.</p>
 <aside class="notes">
 <p>We have seen that <code>UseMethod()</code> will dispatch to the method of the next class in the class vector if a method is not defined for the first class.</p>
 <style type="text/css">
@@ -743,34 +1336,53 @@ NULL</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section>
 <section id="implicit-classes" class="slide level2">
 <h2>Implicit classes</h2>
-<p><code>is.object()</code> can be used to find out if an object has a class (S3/S4/R6)</p>
+<p>As we’ve seen, <code>is.object()</code> or <code>sloop::otype()</code> can be used to find out if an object has a class (S3/S4/R6)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">is.object</span>(<span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a></a><span class="fu">is.object</span>(<span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">is.object</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a></a><span class="fu">is.object</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-<p>An object that does not have an explicit class has an implicit class that will be used for S3 method dispatch. The implicit class can be found with <code>.class2()</code></p>
+<p>An object that does not have an explicit class has an implicit class that will be used for S3 method dispatch.</p>
+</section>
+<section id="implicit-classes-and-dispatch" class="slide level2">
+<h2>Implicit classes and dispatch</h2>
+<p>The implicit class can be found with <code>.class2()</code>, or <code>sloop::s3_class()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
-<span id="cb50-2"><a></a><span class="fu">attr</span>(M, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
+<span id="cb121-2"><a></a><span class="fu">attr</span>(M, <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">.class2</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a></a><span class="fu">.class2</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "matrix"  "array"   "integer" "numeric"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a></a><span class="fu">s3_class</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "matrix"  "integer" "numeric"</code></pre>
+</div>
+</div>
+<p>The <code>class()</code> of an object does not uniquely determine its dispatch:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">print</span>(M))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   print.matrix
+   print.integer
+   print.numeric
+=&gt; print.default</code></pre>
+</div>
 </div>
 <aside class="notes">
-<p>.class2 since R 4.0.0</p>
+<p>.class2 since R 4.0.0.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -788,13 +1400,13 @@ NULL</code></pre>
 <div class="smaller90">
 <p>We can take advantage of existing S3 methods by returning an object of a existing S3 class or an implicit class, using attributes to add custom information</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb54-2"><a></a>center_x <span class="ot">&lt;-</span> <span class="fu">scale</span>(x, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb54-3"><a></a><span class="fu">class</span>(center_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb129-2"><a></a>center_x <span class="ot">&lt;-</span> <span class="fu">scale</span>(x, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb129-3"><a></a><span class="fu">class</span>(center_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "matrix" "array" </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">summary</span>(center_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a></a><span class="fu">summary</span>(center_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       V1           V2    
  Min.   :-2   Min.   :-4  
@@ -806,39 +1418,63 @@ NULL</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">attr</span>(center_x, <span class="st">"scaled:center"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a></a><span class="fu">attr</span>(center_x, <span class="st">"scaled:center"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3 6</code></pre>
 </div>
 </div>
 <p>This can avoid the need to define new classes and methods, in simple cases.</p>
 </div>
+<aside class="notes">
+<p><code>attr(x, "scaled:center")</code> in <code>NULL</code></p>
+<p><code>center_x</code> is still a matrix, and so <code>summary(center_x)</code> dispatches to <code>summary.matrix</code>. We can take advantage of the methods for <code>matrix</code>, without needing to define a new class for <code>scaled</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="your-turn-part-1" class="slide level2">
-<h2>Your turn (part 1)</h2>
-<ol type="1">
-<li>Create a function to fit an ordinary least squares model given a response <code>y</code> and an explanatory variable <code>x</code>, that returns an object of a new class <code>"ols"</code>, that inherits from <code>"lm"</code>.</li>
-<li>Define a print method for your function that it works as follows:</li>
-</ol>
+<section id="under-the-hood" class="slide level2">
+<h2>Under the hood</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb60-2"><a></a>res <span class="ot">&lt;-</span> <span class="fu">ols</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">3</span>))</span>
-<span id="cb60-3"><a></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">scale</span>(x, <span class="at">scale =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Intercept:  -0.217 
-Slope:  -0.1046 </code></pre>
+<pre><code>   scale.matrix
+   scale.double
+   scale.numeric
+=&gt; scale.default</code></pre>
 </div>
 </div>
-<p>Note: I have set <code>options(digits = 4)</code> to limit the number of digits printed by default throughout this presentation (default is 7).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a></a><span class="fu">s3_dispatch</span>(<span class="fu">summary</span>(center_x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=&gt; summary.matrix
+   summary.double
+   summary.numeric
+ * summary.default</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a></a><span class="fu">View</span>(scale.default)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>In <code>scale.default()</code> the attribute <code>"scaled:center"</code> is added to the <code>x</code> argument, so essentially, <code>center_x</code> is a matrix with extra information (in this case, the colMeans of the original columns).</p>
+</div>
 </section>
 <section id="your-turn-part-2" class="slide level2">
 <h2>Your turn (part 2)</h2>
 <ol start="3" type="1">
-<li>Write a summary method for your <code>ols</code> class that uses <code>NextMethod()</code> to compute the usual <code>lm</code> summary, but return an object of class <code>"summary.ols"</code>.</li>
-<li>Write a print method for the <code>"summary.ols"</code> which works as follows:</li>
+<li><p>Write a summary method for your <code>ols</code> class that uses <code>NextMethod()</code> to compute the usual <code>lm</code> summary, but return an object of class <code>"summary.ols"</code>.</p></li>
+<li><p>Write a print method for the <code>"summary.ols"</code> which works as follows:</p></li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coefficients: 
             Estimate Std. Error t value Pr(&gt;|t|)
@@ -864,21 +1500,23 @@ Multiple R-squared:  0.03774 </code></pre>
       }</style></aside>
 </section></section>
 <section>
-<section id="s4" class="title-slide slide level1 inverse center">
-<h1>S4</h1>
+<section id="other-oop-systems" class="title-slide slide level1 inverse center">
+<h1>Other OOP systems</h1>
 
 </section>
-<section id="overview-of-s4" class="slide level2">
-<h2>Overview of S4</h2>
-<p>S4 methods</p>
+<section id="s4" class="slide level2">
+<h2>S4</h2>
+<p>S4 provides a formal approach to OOP. Its implementation is much stricter than S3.</p>
+<p>S4 has <strong>slots</strong>, a named component of the object accessed with <code>@</code>.</p>
+<p>S4 methods:</p>
 <ul>
 <li>use specialised functions for creating classes, generics and methods</li>
 <li>allow <em>multiple inheritance</em>: a class can have multiple parents</li>
 <li>allow <em>multiple dispatch</em>: method selection based on the class of multiple objects</li>
 </ul>
-<p>The <strong>methods</strong> package provides the functions required to use S4 classes and methods, so always load this package when using S4.</p>
 <aside class="notes">
 <p>use import instead</p>
+<p>The <strong>methods</strong> package provides the functions required to use S4 classes and methods, so always load this package when using S4.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -891,430 +1529,28 @@ Multiple R-squared:  0.03774 </code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="s4-classes" class="slide level2">
-<h2>S4 Classes</h2>
-<p>An S4 class can be defined with <code>setClass()</code>, with at least two arguments</p>
+<section id="s4-uses" class="slide level2">
+<h2>S4 uses</h2>
 <ul>
-<li>A <strong>name</strong>, by convention in <code>UpperCamelCase</code>.</li>
-<li>A named character vector specifying the names and classes of the <strong>slots</strong> (fields). Using the pseudo class <code>ANY</code> allows a slot to accept any type of object.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">setClass</span>(<span class="st">"Person"</span>, </span>
-<span id="cb64-2"><a></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb64-3"><a></a>    <span class="at">name =</span> <span class="st">"character"</span>, </span>
-<span id="cb64-4"><a></a>    <span class="at">date_of_birth =</span> <span class="st">"Date"</span>,</span>
-<span id="cb64-5"><a></a>    <span class="at">date_of_death =</span> <span class="st">"Date"</span>,</span>
-<span id="cb64-6"><a></a>    <span class="at">age_at_death =</span> <span class="st">"numeric"</span></span>
-<span id="cb64-7"><a></a>  )</span>
-<span id="cb64-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="creating-a-new-instance" class="slide level2">
-<h2>Creating a new instance</h2>
-<p>A new instance of the S4 object can be created using <code>new()</code></p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>florence <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person"</span>, </span>
-<span id="cb65-2"><a></a>                <span class="at">name =</span> <span class="st">"Florence Nightingale"</span>,</span>
-<span id="cb65-3"><a></a>                <span class="at">date_of_birth =</span> <span class="fu">as.Date</span>(<span class="st">"1820-05-12"</span>),</span>
-<span id="cb65-4"><a></a>                <span class="at">date_of_death =</span> <span class="fu">as.Date</span>(<span class="st">"1910-08-13"</span>),</span>
-<span id="cb65-5"><a></a>                <span class="at">age_at_death =</span> <span class="dv">90</span>)</span>
-<span id="cb65-6"><a></a><span class="fu">str</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal class 'Person' [package ".GlobalEnv"] with 4 slots
-  ..@ name         : chr "Florence Nightingale"
-  ..@ date_of_birth: Date[1:1], format: "1820-05-12"
-  ..@ date_of_death: Date[1:1], format: "1910-08-13"
-  ..@ age_at_death : num 90</code></pre>
-</div>
-</div>
-<p>Note that the second onwards argument names in <code>new</code> are the names in the vector passed to <code>slots()</code> when defining the class.</p>
-</section>
-<section id="examining-s4-objects" class="slide level2">
-<h2>Examining S4 objects</h2>
-<p>Find the type of S4 class</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="fu">is.object</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="fu">isS4</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">.class2</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Person"</code></pre>
-</div>
-</div>
-<p>Extract the value of a slot (use @)</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">getSlots</span>(<span class="st">"Person"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         name date_of_birth date_of_death  age_at_death 
-  "character"        "Date"        "Date"     "numeric" </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>florence<span class="sc">@</span>age_at_death <span class="co"># or slot(florence, "age_at_death")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 90</code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>class() will only show class itself, not classes it inherits from</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="prototype" class="slide level2">
-<h2>Prototype</h2>
-<p>The <code>prototype</code> argument can be used to specify default values, enabling partial specification</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">setClass</span>(<span class="st">"Person"</span>, </span>
-<span id="cb77-2"><a></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb77-3"><a></a>    <span class="at">name =</span> <span class="st">"character"</span>, </span>
-<span id="cb77-4"><a></a>    <span class="at">date_of_birth =</span> <span class="st">"Date"</span>,</span>
-<span id="cb77-5"><a></a>    <span class="at">date_of_death =</span> <span class="st">"Date"</span>,</span>
-<span id="cb77-6"><a></a>    <span class="at">age_at_death =</span> <span class="st">"numeric"</span></span>
-<span id="cb77-7"><a></a>  ),</span>
-<span id="cb77-8"><a></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb77-9"><a></a>    <span class="at">name =</span> <span class="cn">NA_character_</span>, </span>
-<span id="cb77-10"><a></a>    <span class="at">date_of_birth =</span> <span class="fu">as.Date</span>(<span class="cn">NA</span>),</span>
-<span id="cb77-11"><a></a>    <span class="at">date_of_death =</span> <span class="fu">as.Date</span>(<span class="cn">NA</span>),</span>
-<span id="cb77-12"><a></a>    <span class="at">age_at_death =</span> <span class="cn">NA_real_</span></span>
-<span id="cb77-13"><a></a>  )</span>
-<span id="cb77-14"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Be sure to use <code>list()</code> not <code>c()</code> for <code>prototype</code> – easy mistake to make!</p>
-</section>
-<section id="initialize" class="slide level2">
-<h2><code>initialize()</code></h2>
-<p>An <code>initialize()</code> method can be used for more control over initialization</p>
-<div class="smaller90">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a><span class="fu">setMethod</span>(<span class="st">"initialize"</span>, <span class="st">"Person"</span>, </span>
-<span id="cb78-2"><a></a>  <span class="cf">function</span>(.Object, ...) {</span>
-<span id="cb78-3"><a></a>    <span class="co"># initialize with default method </span></span>
-<span id="cb78-4"><a></a>    <span class="co"># (named arguments override defaults)</span></span>
-<span id="cb78-5"><a></a>    .Object <span class="ot">&lt;-</span> <span class="fu">callNextMethod</span>(.Object, ...)</span>
-<span id="cb78-6"><a></a>    </span>
-<span id="cb78-7"><a></a>    <span class="co"># compute age at death if not specified</span></span>
-<span id="cb78-8"><a></a>    year <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">format</span>(x, <span class="st">"%Y"</span>))</span>
-<span id="cb78-9"><a></a>    m_day <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">format</span>(x, <span class="st">"%m%d"</span>))</span>
-<span id="cb78-10"><a></a>    </span>
-<span id="cb78-11"><a></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(.Object<span class="sc">@</span>age_at_death)){</span>
-<span id="cb78-12"><a></a>      n_year <span class="ot">&lt;-</span> <span class="fu">year</span>(.Object<span class="sc">@</span>date_of_death) <span class="sc">-</span> <span class="fu">year</span>(.Object<span class="sc">@</span>date_of_birth)</span>
-<span id="cb78-13"><a></a>      birthday <span class="ot">&lt;-</span> <span class="fu">m_day</span>(.Object<span class="sc">@</span>date_of_death) <span class="sc">&gt;=</span> <span class="fu">m_day</span>(.Object<span class="sc">@</span>date_of_birth)</span>
-<span id="cb78-14"><a></a>      .Object<span class="sc">@</span>age_at_death <span class="ot">&lt;-</span> n_year <span class="sc">-</span> <span class="sc">!</span>birthday</span>
-<span id="cb78-15"><a></a>    }</span>
-<span id="cb78-16"><a></a>    .Object</span>
-<span id="cb78-17"><a></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="creating-a-new-s4-obect-from-an-old-one" class="slide level2">
-<h2>Creating a new S4 obect from an old one</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>florence <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person"</span>, </span>
-<span id="cb79-2"><a></a>                <span class="at">name =</span> <span class="st">"Florence Nightingale"</span>,</span>
-<span id="cb79-3"><a></a>                <span class="at">date_of_birth =</span> <span class="fu">as.Date</span>(<span class="st">"1820-05-12"</span>))</span>
-<span id="cb79-4"><a></a><span class="fu">str</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal class 'Person' [package ".GlobalEnv"] with 4 slots
-  ..@ name         : chr "Florence Nightingale"
-  ..@ date_of_birth: Date[1:1], format: "1820-05-12"
-  ..@ date_of_death: Date[1:1], format: NA
-  ..@ age_at_death : num NA</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>florence <span class="ot">&lt;-</span> <span class="fu">initialize</span>(florence, </span>
-<span id="cb81-2"><a></a>                       <span class="at">date_of_death =</span> <span class="fu">as.Date</span>(<span class="st">"1910-08-13"</span>)) </span>
-<span id="cb81-3"><a></a><span class="fu">str</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal class 'Person' [package ".GlobalEnv"] with 4 slots
-  ..@ name         : chr "Florence Nightingale"
-  ..@ date_of_birth: Date[1:1], format: "1820-05-12"
-  ..@ date_of_death: Date[1:1], format: "1910-08-13"
-  ..@ age_at_death : num 90</code></pre>
-</div>
-</div>
-</section>
-<section id="inheritance-1" class="slide level2">
-<h2>Inheritance</h2>
-<p>The <code>contains</code> argument to <code>setClass()</code> specifies a class or classes to inherit slots and behaviour from</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a><span class="fu">setClass</span>(<span class="st">"BanknoteCharacter"</span>, </span>
-<span id="cb83-2"><a></a>  <span class="at">contains =</span> <span class="st">"Person"</span>, </span>
-<span id="cb83-3"><a></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb83-4"><a></a>    <span class="at">denomination =</span> <span class="st">"numeric"</span>,</span>
-<span id="cb83-5"><a></a>    <span class="at">first_issue =</span> <span class="st">"Date"</span>,</span>
-<span id="cb83-6"><a></a>    <span class="at">last_legal =</span> <span class="st">"Date"</span></span>
-<span id="cb83-7"><a></a>  ),</span>
-<span id="cb83-8"><a></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb83-9"><a></a>    <span class="at">denomination =</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb83-10"><a></a>    <span class="at">first_issue =</span> <span class="fu">as.Date</span>(<span class="cn">NA</span>),</span>
-<span id="cb83-11"><a></a>    <span class="at">last_legal =</span> <span class="fu">as.Date</span>(<span class="cn">NA</span>)</span>
-<span id="cb83-12"><a></a>  )</span>
-<span id="cb83-13"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="new-instance-of-subclass" class="slide level2">
-<h2>New instance of subclass</h2>
-<p>Creating a new instance of the subclass will fill in the slots of the superclass</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a>seriesD_10GBP <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"BanknoteCharacter"</span>, </span>
-<span id="cb84-2"><a></a>                     <span class="at">name =</span> <span class="st">"Florence Nightingale"</span>, </span>
-<span id="cb84-3"><a></a>                     <span class="at">date_of_birth =</span> <span class="fu">as.Date</span>(<span class="st">"1820-05-12"</span>), </span>
-<span id="cb84-4"><a></a>                     <span class="at">date_of_death =</span> <span class="fu">as.Date</span>(<span class="st">"1910-08-12"</span>))</span>
-<span id="cb84-5"><a></a><span class="fu">str</span>(seriesD_10GBP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal class 'BanknoteCharacter' [package ".GlobalEnv"] with 7 slots
-  ..@ denomination : num NA
-  ..@ first_issue  : Date[1:1], format: NA
-  ..@ last_legal   : Date[1:1], format: NA
-  ..@ name         : chr "Florence Nightingale"
-  ..@ date_of_birth: Date[1:1], format: "1820-05-12"
-  ..@ date_of_death: Date[1:1], format: "1910-08-12"
-  ..@ age_at_death : num 90</code></pre>
-</div>
-</div>
-</section>
-<section id="show-defined-s4-class" class="slide level2">
-<h2>Show defined S4 Class</h2>
-<p>Use <code>showClass()</code> to show (print) an S4 Class</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a><span class="fu">showClass</span>(<span class="st">"Person"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Class "Person" [in ".GlobalEnv"]
-
-Slots:
-                                                              
-Name:           name date_of_birth date_of_death  age_at_death
-Class:     character          Date          Date       numeric
-
-Known Subclasses: "BanknoteCharacter"</code></pre>
-</div>
-</div>
-</section>
-<section id="helper-function" class="slide level2">
-<h2>Helper function</h2>
-<p>If a user is to create these objects, define a helper function named by the class</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>Person <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">name =</span> <span class="cn">NA</span>, <span class="at">date_of_birth =</span> <span class="cn">NA</span>, <span class="at">date_of_death =</span> <span class="cn">NA</span>) {</span>
-<span id="cb88-2"><a></a>  <span class="fu">new</span>(<span class="st">"Person"</span>, </span>
-<span id="cb88-3"><a></a>      <span class="at">name =</span> <span class="fu">as.character</span>(name), </span>
-<span id="cb88-4"><a></a>      <span class="at">date_of_birth =</span> <span class="fu">as.Date</span>(date_of_birth), </span>
-<span id="cb88-5"><a></a>      <span class="at">date_of_death =</span> <span class="fu">as.Date</span>(date_of_death))</span>
-<span id="cb88-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a>ada <span class="ot">&lt;-</span> <span class="fu">Person</span>(<span class="st">"Ada Lovelace"</span>, <span class="st">"1815-12-10"</span>, <span class="st">"1852-11-27"</span>)</span>
-<span id="cb89-2"><a></a><span class="fu">str</span>(ada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal class 'Person' [package ".GlobalEnv"] with 4 slots
-  ..@ name         : chr "Ada Lovelace"
-  ..@ date_of_birth: Date[1:1], format: "1815-12-10"
-  ..@ date_of_death: Date[1:1], format: "1852-11-27"
-  ..@ age_at_death : num 36</code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>Put computation in the <code>initialize</code> method where possible, so that it can be reused by subclasses.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="validator-function" class="slide level2">
-<h2>Validator function</h2>
-<p>Use <code>setValidity()</code> to check constraints beyond data type, e.g.&nbsp;that all slots have the same length</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a><span class="fu">setValidity</span>(<span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
-<span id="cb91-2"><a></a>  len <span class="ot">&lt;-</span> <span class="fu">vapply</span>(<span class="fu">slotNames</span>(<span class="st">"Person"</span>), </span>
-<span id="cb91-3"><a></a>                <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">slot</span>(object, x)),</span>
-<span id="cb91-4"><a></a>                <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb91-5"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(len <span class="sc">==</span> len[<span class="dv">1</span>])){</span>
-<span id="cb91-6"><a></a>    <span class="st">"slots should all be the same length"</span></span>
-<span id="cb91-7"><a></a>  } <span class="cf">else</span> {</span>
-<span id="cb91-8"><a></a>    <span class="cn">TRUE</span></span>
-<span id="cb91-9"><a></a>  }</span>
-<span id="cb91-10"><a></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a><span class="fu">Person</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Ada Lovelace"</span>, <span class="st">"Grace Hopper"</span>), </span>
-<span id="cb92-2"><a></a>       <span class="at">date_of_birth =</span> <span class="st">"1815-12-10"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in validObject(.Object): invalid class "Person" object: slots should all be the same length</code></pre>
-</div>
-</div>
-</section>
-<section id="s4-generic-functions" class="slide level2">
-<h2>S4 generic functions</h2>
-<p>S4 generic functions are (usually) a wrapper to <code>standardGeneric()</code>, e.g.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a><span class="fu">getGeneric</span>(<span class="st">"kronecker"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>standardGeneric for "kronecker" defined from package "base"
-
-function (X, Y, FUN = "*", make.dimnames = FALSE, ...) 
-standardGeneric("kronecker")
-&lt;bytecode: 0x14bd211d8&gt;
-&lt;environment: 0x14bd14420&gt;
-Methods may be defined for arguments: X, Y, FUN, make.dimnames
-Use  showMethods(kronecker)  for currently available ones.</code></pre>
-</div>
-</div>
-<p>By default, all arguments apart from <code>...</code> are used for method dispatch.</p>
-</section>
-<section id="writing-s4-generic-functions" class="slide level2">
-<h2>Writing S4 generic functions</h2>
-<p>Use <code>setGeneric</code> to define a new generic, with the optional <code>signature</code> argument to specify the arguments to use for method dispatch</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a><span class="fu">setGeneric</span>(<span class="st">"myGeneric"</span>, </span>
-<span id="cb96-2"><a></a>  <span class="cf">function</span>(x, ..., <span class="at">verbose =</span> <span class="cn">TRUE</span>) <span class="fu">standardGeneric</span>(<span class="st">"myGeneric"</span>),</span>
-<span id="cb96-3"><a></a>  <span class="at">signature =</span> <span class="st">"x"</span></span>
-<span id="cb96-4"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "myGeneric"</code></pre>
-</div>
-</div>
-<p>Do not use <code>{}</code> in the function definition here.</p>
-<p>S4 generics use <code>lowerCamelCase</code> names by convention.</p>
-</section>
-<section id="s4-methods" class="slide level2">
-<h2>S4 Methods</h2>
-<p>S4 methods for a generic function are defined with <code>setMethod()</code>, which takes three main arguments</p>
-<ul>
-<li>The <strong>name</strong> of the generic function.</li>
-<li>The <strong>signature</strong> specifying the classes for one or more of the arguments used for method dispatch</li>
-<li>The method, defined as a function with a superset of the arguments of the generic</li>
+<li>S4 is the OOP system used for bioconductor packages</li>
+<li>The <strong>Matrix</strong> package</li>
 </ul>
 </section>
-<section id="writing-s4-methods" class="slide level2">
-<h2>Writing S4 Methods</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a><span class="fu">args</span>(<span class="fu">getGeneric</span>(<span class="st">"show"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>function (object) 
-NULL</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
-<span id="cb100-2"><a></a>  <span class="fu">cat</span>(object<span class="sc">@</span>name, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb100-3"><a></a>      <span class="st">"Born: "</span>, <span class="fu">format</span>(object<span class="sc">@</span>date_of_birth, <span class="st">"%d %B %Y"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb100-4"><a></a>      <span class="st">"Died: "</span>, <span class="fu">format</span>(object<span class="sc">@</span>date_of_death, <span class="st">"%d %B %Y"</span>), </span>
-<span id="cb100-5"><a></a>                <span class="st">" (aged "</span>, object<span class="sc">@</span>age_at_death, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb100-6"><a></a>      <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb100-7"><a></a>})</span>
-<span id="cb100-8"><a></a>florence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Florence Nightingale
-Born: 12 May 1820
-Died: 13 August 1910 (aged 90)</code></pre>
-</div>
-</div>
-</section>
-<section id="accessor-generics" class="slide level2">
-<h2>Accessor generics</h2>
-<p>It is good practice to define generics to get and set slots that the user should have access to.</p>
-<p>For example, a generic to get and set the date of birth</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a><span class="fu">setGeneric</span>(<span class="st">"dob"</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">"dob"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "dob"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a><span class="fu">setGeneric</span>(<span class="st">"dob&lt;-"</span>, <span class="cf">function</span>(x, value) <span class="fu">standardGeneric</span>(<span class="st">"dob&lt;-"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "dob&lt;-"</code></pre>
-</div>
-</div>
-</section>
-<section id="accessor-methods" class="slide level2">
-<h2>Accessor methods</h2>
-<p>Methods can then be defined for multiple classes using the same interface.</p>
-<p>Access the date of birth from a Person object</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a><span class="fu">setMethod</span>(<span class="st">"dob"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>date_of_birth)</span>
-<span id="cb106-2"><a></a><span class="fu">dob</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "1820-05-12"</code></pre>
-</div>
-</div>
-<p>Change the date of birth</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a><span class="fu">setMethod</span>(<span class="st">"dob&lt;-"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, value) {</span>
-<span id="cb108-2"><a></a>  x<span class="sc">@</span>date_of_birth <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(value)</span>
-<span id="cb108-3"><a></a>  <span class="fu">validObject</span>(x)</span>
-<span id="cb108-4"><a></a>  x</span>
-<span id="cb108-5"><a></a>})</span>
-<span id="cb108-6"><a></a><span class="fu">dob</span>(florence) <span class="ot">&lt;-</span> <span class="st">"1820-05-11"</span></span>
-<span id="cb108-7"><a></a><span class="fu">dob</span>(florence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "1820-05-11"</code></pre>
-</div>
-</div>
-</section>
-<section id="method-dispatch-1" class="slide level2">
-<h2>Method dispatch</h2>
+<section id="r6" class="slide level2">
+<h2>R6</h2>
 <ul>
-<li>One argument, single inheritance along vector of classes:
-<ul>
-<li>Same as for S3</li>
-</ul></li>
-<li>One argument, multiple inheritance:
-<ul>
-<li>Follow all possible paths from child class to parent classes</li>
-<li>Dispatch to first method found with the shortest path</li>
-</ul></li>
-<li>Multiple dispatch
-<ul>
-<li>As multiple inheritance, but follow possible paths for multiple arguments</li>
-</ul></li>
+<li>The R6 OOP system is defined in the <strong>R6</strong> package: <a href="https://r6.r-lib.org" class="uri">https://r6.r-lib.org</a></li>
+<li>Encapsulated OOP, similar to OOP systems in other languages</li>
+<li>The Advanced R book cautions against using R6 - it leads to non-idiomatic R code.</li>
 </ul>
-<p>Keep it simple: dispatch on one or two arguments usually sufficient.</p>
-<p>Avoid ambiguous cases by defining methods earlier in path.</p>
 </section>
-<section id="pseudo-classes" class="slide level2">
-<h2>Pseudo-classes</h2>
-<p>Methods can be defined for the <code>ANY</code> pseudo-class</p>
+<section id="s7" class="slide level2">
+<h2>S7</h2>
 <ul>
-<li>Only selected if no method found for real classes</li>
+<li>Currently in the <strong>S7</strong> package: <a href="https://rconsortium.github.io/S7/" class="uri">https://rconsortium.github.io/S7/</a></li>
+<li>Will eventually be incorporated into R as the successor S3 and S4.</li>
+<li>An example of using S7 for generative art: <a href="https://blog.djnavarro.net/posts/2024-02-25_s7/" class="uri">https://blog.djnavarro.net/posts/2024-02-25_s7/</a></li>
 </ul>
-<p>The <code>MISSING</code> pseudo-class is useful for dispatch on two arguments: allow different behaviour if only one argument specified.</p>
-</section>
-<section id="your-turn" class="slide level2">
-<h2>Your turn</h2>
-<div class="smaller80">
-<ol type="1">
-<li>Create an S4 class <code>Diag</code> to represent a diagonal matrix with two slots:</li>
-</ol>
-<ul>
-<li><p><code>n</code> the number of rows/cols</p></li>
-<li><p><code>x</code> the numeric values of the diagonal elements</p>
-<p>Add a prototype to specify default values.</p></li>
-</ul>
-<ol start="2" type="1">
-<li>Test your class by creating a new instance first without providing any values for the slots and then providing some example values.</li>
-<li>Create an <code>initialize</code> method so that the <code>n</code> slot is computed automatically and does not have to be provided.</li>
-<li>Create a <code>Diag()</code> helper function to create a new <code>Diag</code> object, with the user only having to specify the diagonal elements.</li>
-<li>Create a <code>show</code> method to state the size of the matrix and print the diagonal elements.</li>
-</ol>
-</div>
 </section></section>
 <section>
 <section id="end-matter" class="title-slide slide level1 inverse center">
