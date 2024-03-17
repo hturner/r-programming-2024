@@ -88,7 +88,7 @@
     "href": "slides/05-efficient-programming/index.html#benchmark",
     "title": "Efficient Programming",
     "section": "bench::mark()",
-    "text": "bench::mark()\nRun the two alternatives with bench::mark(). This function\n\nRuns alternatives ≥ 1 time; at most enough times to take 0.5s\nMakes sure the two expressions return the same result!\n\n\n\nlibrary(bench)\n(bm &lt;- bench::mark(grow(5000), pre_specify(5000)))\n\nWarning: Some expressions had a GC in every iteration; so filtering is\ndisabled.\n\n\n# A tibble: 2 × 6\n  expression             min   median `itr/sec` mem_alloc `gc/sec`\n  &lt;bch:expr&gt;        &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;\n1 grow(5000)            27ms   30.9ms      32.1    95.6MB    58.5 \n2 pre_specify(5000)    101µs  105.7µs    9014.     55.8KB     8.00\n\n\n\nGC is the garbage collector which tidies up deleted objects\nitr/sec is how many times the expression could be run in 1s"
+    "text": "bench::mark()\nRun the two alternatives with bench::mark(). This function\n\nRuns alternatives ≥ 1 time; at most enough times to take 0.5s\nMakes sure the two expressions return the same result!\n\n\n\nlibrary(bench)\n(bm &lt;- bench::mark(grow(5000), pre_specify(5000)))\n\nWarning: Some expressions had a GC in every iteration; so filtering is\ndisabled.\n\n\n# A tibble: 2 × 6\n  expression             min   median `itr/sec` mem_alloc `gc/sec`\n  &lt;bch:expr&gt;        &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;\n1 grow(5000)          23.8ms     28ms      35.8    95.6MB    65.6 \n2 pre_specify(5000)   98.7µs    102µs    9362.     55.8KB     8.00\n\n\n\nGC is the garbage collector which tidies up deleted objects\nitr/sec is how many times the expression could be run in 1s"
   },
   {
     "objectID": "slides/05-efficient-programming/index.html#plotting-benchmarks",
@@ -109,7 +109,7 @@
     "href": "slides/05-efficient-programming/index.html#benchpress",
     "title": "Efficient Programming",
     "section": "bench::press()",
-    "text": "bench::press()\n\n\nbench::press(n = c(10, 100), k = c(10, 1),\n  bench::mark(gl(n, k, length = 1000)) # `gl` generates factor levels\n)\n\nRunning with:\n      n     k\n\n\n1    10    10\n\n\n2   100    10\n\n\n3    10     1\n\n\n4   100     1\n\n\n# A tibble: 4 × 8\n  expression                  n     k    min median `itr/sec` mem_alloc `gc/sec`\n  &lt;bch:expr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;\n1 gl(n, k, length = 1000)    10    10  3.2µs 3.77µs   242097.    12.4KB     24.2\n2 gl(n, k, length = 1000)   100    10  9.1µs 9.96µs    96803.   11.05KB     19.4\n3 gl(n, k, length = 1000)    10     1 2.79µs  3.2µs   289904.    3.95KB     29.0\n4 gl(n, k, length = 1000)   100     1 6.07µs 6.72µs   138892.    7.53KB     27.8"
+    "text": "bench::press()\n\n\nbench::press(n = c(10, 100), k = c(10, 1),\n  bench::mark(gl(n, k, length = 1000)) # `gl` generates factor levels\n)\n\nRunning with:\n      n     k\n\n\n1    10    10\n\n\n2   100    10\n\n\n3    10     1\n\n\n4   100     1\n\n\n# A tibble: 4 × 8\n  expression                  n     k    min median `itr/sec` mem_alloc `gc/sec`\n  &lt;bch:expr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;\n1 gl(n, k, length = 1000)    10    10 3.12µs 3.65µs   245179.    12.4KB     24.5\n2 gl(n, k, length = 1000)   100    10 8.86µs 9.43µs   101218.   11.05KB     20.2\n3 gl(n, k, length = 1000)    10     1 2.83µs 3.16µs   302419.    3.95KB     30.2\n4 gl(n, k, length = 1000)   100     1  5.9µs 6.48µs   146617.    7.53KB     14.7"
   },
   {
     "objectID": "slides/05-efficient-programming/index.html#exercise-1",
@@ -221,7 +221,7 @@
     "href": "slides/05-efficient-programming/index.html#exercise-2-continued",
     "title": "Efficient Programming",
     "section": "Exercise 2 (continued)",
-    "text": "Exercise 2 (continued)\nThe for loop in the previous code is suitable for vectorization: the iterations are completely independent.\nrnorm() is vectorized in the arguments mu and sd, e.g. to simulate a value from the 1st and 3rd component we could write:\n\nmu &lt;- c(0, 10, 3)\nsd &lt;- sqrt(c(1, 1, 0.1))\nrnorm(2, mu[c(1, 3)], sd[c(1, 3)])\n\n[1] 0.1701784 2.8672952\n\n\nUse this information to replace the for loop, using a single call to rnorm() to simulate n values from the mixture distribution.\nUse bench::mark() to compare the two approaches - don’t forget to set the same seed so the simulations are equivalent!"
+    "text": "Exercise 2 (continued)\nThe for loop in the previous code is suitable for vectorization: the iterations are completely independent.\nrnorm() is vectorized in the arguments mu and sd, e.g. to simulate a value from the 1st and 3rd component we could write:\n\nmu &lt;- c(0, 10, 3)\nsd &lt;- sqrt(c(1, 1, 0.1))\nrnorm(2, mu[c(1, 3)], sd[c(1, 3)])\n\n[1] -1.371225  3.324096\n\n\nUse this information to replace the for loop, using a single call to rnorm() to simulate n values from the mixture distribution.\nUse bench::mark() to compare the two approaches - don’t forget to set the same seed so the simulations are equivalent!"
   },
   {
     "objectID": "slides/05-efficient-programming/index.html#parallelisation-1",
@@ -354,7 +354,7 @@
     "href": "slides/02-functions/index.html#name-and-order-of-arguments",
     "title": "Functions",
     "section": "Name and order of arguments",
-    "text": "Name and order of arguments\nThe user can pass objects to these arguments using their names or by supplying unnamed values in the right order\n\nrnorm(5, 1, 10)\n\n[1] -13.119010   1.423534  17.296840   7.137921  -8.511601\n\nrnorm(5, sd = 10)\n\n[1] -3.958155 -1.881722  5.366455  4.357883  9.710751\n\n\nSo naming and order is important! Some guidelines\n\nput compulsory arguments first, e.g. data\nput rarely used arguments last, e.g. tolerance setting\nuse short but meaningful argument names\nif relevant, use the same argument names as similar functions"
+    "text": "Name and order of arguments\nThe user can pass objects to these arguments using their names or by supplying unnamed values in the right order\n\nrnorm(5, 1, 10)\n\n[1]  5.327188 -2.238011 -5.107330  4.713281 11.541684\n\nrnorm(5, sd = 10)\n\n[1] -18.464723   9.855951  -1.633670  10.121746 -10.506900\n\n\nSo naming and order is important! Some guidelines\n\nput compulsory arguments first, e.g. data\nput rarely used arguments last, e.g. tolerance setting\nuse short but meaningful argument names\nif relevant, use the same argument names as similar functions"
   },
   {
     "objectID": "slides/02-functions/index.html#return-values-single",
@@ -369,6 +369,13 @@
     "title": "Functions",
     "section": "Return values (multiple)",
     "text": "Return values (multiple)\nMultiple objects can be returned in a list:\n\nmean_and_sd &lt;- function(x) {\n  res_mean &lt;- mean(x, na.rm = TRUE)\n  res_sd &lt;- sd(x)\n  \n  list(mean = res_mean,\n       sd = res_sd)\n}\n\nx &lt;- 1:3\nmean_and_sd(x)\n\n$mean\n[1] 2\n\n$sd\n[1] 1"
+  },
+  {
+    "objectID": "slides/02-functions/index.html#multiple-return-values-different-types",
+    "href": "slides/02-functions/index.html#multiple-return-values-different-types",
+    "title": "Functions",
+    "section": "Multiple return values, different types",
+    "text": "Multiple return values, different types\n\nsymmetric_sums &lt;- function(mat) {\n  sym_mat &lt;- mat + t(mat)\n  sum &lt;- sum(sym_mat)\n  list(sym_mat = sym_mat, sum = sum)\n}\nmat &lt;- matrix(1:9, 3, 3)\nsymmetric_sums(mat)\n\n$sym_mat\n     [,1] [,2] [,3]\n[1,]    2    6   10\n[2,]    6   10   14\n[3,]   10   14   18\n\n$sum\n[1] 90"
   },
   {
     "objectID": "slides/02-functions/index.html#rstudio-helper",
@@ -536,7 +543,7 @@
     "href": "slides/02-functions/index.html#exercise-3",
     "title": "Functions",
     "section": "Exercise 3",
-    "text": "Exercise 3\nOpen debug_practice.R and source the function f().\nTry to run f(10) - there’s an error! Use traceback() to see which function call generated the error, then fix the problem.\nRun f(10) again - there is another error! Can you fix this directly given the error message?\nTry running f(1) - is the result what you expected? Use debugonce() to set debugging on f() and re-run f(1). Step through the function, printing each object as it is created to see what is happening.\nCan you think how to improve the function? See if you can modify the function to give a sensible result for any integer.\n\nWon’t have seen apply in this course yet - that’s covered in Session 4. Maybe they’ll already know it, otherwise instructor can help, or point towards ?apply"
+    "text": "Exercise 3\nOpen debug_practice.R and source the function f().\nTry to run f(10) - there’s an error! Use traceback() to see which function call generated the error, then fix the problem.\nRun f(10) again - there is another error! Can you fix this directly given the error message?\nTry running f(1) - is the result what you expected? Use debugonce() to set debugging on f() and re-run f(1). Step through the function, printing each object as it is created to see what is happening.\nCan you think how to improve the function? See if you can modify the function to give a sensible result for any integer.\n\nWon’t have seen apply in this course yet - that’s covered in Session 4. Maybe they’ll already know it, otherwise instructor can help, or point towards ?apply\nShow how traceback works, and show View(apply) to show that’s where the call to match.fun occurs."
   },
   {
     "objectID": "slides/02-functions/index.html#references",
@@ -1285,7 +1292,7 @@
     "href": "slides/04-github/index.html#your-turn-create-a-github-repository",
     "title": "Open Source and Git(Hub)",
     "section": "Your turn! Create a GitHub repository",
-    "text": "Your turn! Create a GitHub repository\n\nLogin or sign up for a free account at https://www.github.com.\n\nRecommend to use personal email\nUsername recommendations:\n\nIncorporate your actual name\nReuse your username from other contexts.\nUse a name you can share in professional contexts.\nUse all lower case letters.\n\n\nClick on + in the top right to create a new, public, repository called github-intro.\n\nChoose to initialize the repository with a README file"
+    "text": "Your turn! Create a GitHub repository\n\nLogin or sign up for a free account at https://www.github.com.\n\nRecommend using personal email\nUsername recommendations:\n\nIncorporate your actual name\nReuse your username from other contexts.\nUse a name you can share in professional contexts.\nUse all lower case letters.\n\n\nClick on + in the top right to create a new, public, repository called github-intro.\n\nChoose to initialize the repository with a README file"
   },
   {
     "objectID": "slides/04-github/index.html#your-turn-edit-on-github",

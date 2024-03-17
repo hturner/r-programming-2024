@@ -477,11 +477,11 @@ NULL</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -13.119010   1.423534  17.296840   7.137921  -8.511601</code></pre>
+<pre><code>[1]  5.327188 -2.238011 -5.107330  4.713281 11.541684</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -3.958155 -1.881722  5.366455  4.357883  9.710751</code></pre>
+<pre><code>[1] -18.464723   9.855951  -1.633670  10.121746 -10.506900</code></pre>
 </div>
 </div>
 <p>So naming and order is important! Some guidelines</p>
@@ -533,6 +533,28 @@ $sd
 </div>
 </div>
 </section>
+<section id="multiple-return-values-different-types" class="slide level2">
+<h2>Multiple return values, different types</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>symmetric_sums <span class="ot">&lt;-</span> <span class="cf">function</span>(mat) {</span>
+<span id="cb14-2"><a></a>  sym_mat <span class="ot">&lt;-</span> mat <span class="sc">+</span> <span class="fu">t</span>(mat)</span>
+<span id="cb14-3"><a></a>  sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(sym_mat)</span>
+<span id="cb14-4"><a></a>  <span class="fu">list</span>(<span class="at">sym_mat =</span> sym_mat, <span class="at">sum =</span> sum)</span>
+<span id="cb14-5"><a></a>}</span>
+<span id="cb14-6"><a></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb14-7"><a></a><span class="fu">symmetric_sums</span>(mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$sym_mat
+     [,1] [,2] [,3]
+[1,]    2    6   10
+[2,]    6   10   14
+[3,]   10   14   18
+
+$sum
+[1] 90</code></pre>
+</div>
+</div>
+</section>
 <section id="rstudio-helper" class="slide level2">
 <h2>RStudio helper</h2>
 <p>RStudio has a helper to turn code into a function:</p>
@@ -568,22 +590,22 @@ $sd
 <p>Arguments are used as objects in the function code.</p>
 <p>A new environment is created each time the function is called, separate from the global workspace.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-2"><a></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb14-3"><a></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
-<span id="cb14-4"><a></a>    a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-5"><a></a>    x <span class="ot">&lt;-</span> x <span class="sc">+</span> a</span>
-<span id="cb14-6"><a></a>    x <span class="sc">+</span> y</span>
-<span id="cb14-7"><a></a>}</span>
-<span id="cb14-8"><a></a><span class="fu">f</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb16-3"><a></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb16-4"><a></a>    a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-5"><a></a>    x <span class="ot">&lt;-</span> x <span class="sc">+</span> a</span>
+<span id="cb16-6"><a></a>    x <span class="sc">+</span> y</span>
+<span id="cb16-7"><a></a>}</span>
+<span id="cb16-8"><a></a><span class="fu">f</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'a' not found</code></pre>
 </div>
@@ -593,17 +615,17 @@ $sd
 <h2>Lexical scoping</h2>
 <p>If an object is not defined within the function, or passed in as an argument, R looks for it in the <em>parent environment</em> where the function was defined</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb20-2"><a></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb20-3"><a></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb20-4"><a></a>    x <span class="sc">+</span> y</span>
-<span id="cb20-5"><a></a>}</span>
-<span id="cb20-6"><a></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb22-2"><a></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb22-3"><a></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb22-4"><a></a>    x <span class="sc">+</span> y</span>
+<span id="cb22-5"><a></a>}</span>
+<span id="cb22-6"><a></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">rm</span>(y)</span>
-<span id="cb22-2"><a></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">rm</span>(y)</span>
+<span id="cb24-2"><a></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in f(x): object 'y' not found</code></pre>
 </div>
@@ -615,34 +637,34 @@ $sd
 <p><code>...</code> (the <em>ellipsis</em>) allow unspecified arguments to be passed to the function.</p>
 <p>This device is used by functions that work with arbitrary numbers of objects, e.g.&nbsp;</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">args</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">args</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (..., na.rm = FALSE) 
 NULL</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 17</code></pre>
 </div>
 </div>
 <p>It can also be used to pass on arguments to another function, e.g.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>t_statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g, ...) {</span>
-<span id="cb28-2"><a></a>    <span class="fu">t.test</span>(x <span class="sc">~</span> g, ...)<span class="sc">$</span>stat</span>
-<span id="cb28-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>t_statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g, ...) {</span>
+<span id="cb30-2"><a></a>    <span class="fu">t.test</span>(x <span class="sc">~</span> g, ...)<span class="sc">$</span>stat</span>
+<span id="cb30-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="using-..." class="slide level2">
 <h2>Using <code>...</code></h2>
 <p>Arguments passed to <code>...</code> can be collected into a list for further analysis</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>means <span class="ot">&lt;-</span> <span class="cf">function</span>(...){</span>
-<span id="cb29-2"><a></a>    dots <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
-<span id="cb29-3"><a></a>    <span class="fu">vapply</span>(dots, mean, <span class="fu">numeric</span>(<span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb29-4"><a></a>}</span>
-<span id="cb29-5"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb29-6"><a></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb29-7"><a></a><span class="fu">means</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>means <span class="ot">&lt;-</span> <span class="cf">function</span>(...){</span>
+<span id="cb31-2"><a></a>    dots <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
+<span id="cb31-3"><a></a>    <span class="fu">vapply</span>(dots, mean, <span class="fu">numeric</span>(<span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-4"><a></a>}</span>
+<span id="cb31-5"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb31-6"><a></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb31-7"><a></a><span class="fu">means</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.0 2.5</code></pre>
 </div>
@@ -671,20 +693,20 @@ NULL</code></pre>
 <h2>Using functions from other packages</h2>
 <p>In our own functions (outside of packages), it is possible to use <code>library</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>scale_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(X){</span>
-<span id="cb31-2"><a></a>    <span class="fu">library</span>(matrixStats)</span>
-<span id="cb31-3"><a></a>    X <span class="ot">&lt;-</span> X <span class="sc">-</span> <span class="fu">rowMeans</span>(X)</span>
-<span id="cb31-4"><a></a>    X<span class="sc">/</span><span class="fu">rowSds</span>(X)</span>
-<span id="cb31-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>scale_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(X){</span>
+<span id="cb33-2"><a></a>    <span class="fu">library</span>(matrixStats)</span>
+<span id="cb33-3"><a></a>    X <span class="ot">&lt;-</span> X <span class="sc">-</span> <span class="fu">rowMeans</span>(X)</span>
+<span id="cb33-4"><a></a>    X<span class="sc">/</span><span class="fu">rowSds</span>(X)</span>
+<span id="cb33-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>But this loads the entire package, potentially leading to clashes with functions from other packages. It is better to use the <strong>import</strong> package:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>scale_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(X){</span>
-<span id="cb32-2"><a></a>    import<span class="sc">::</span><span class="fu">from</span>(matrixStats, rowSds)</span>
-<span id="cb32-3"><a></a>    X <span class="ot">&lt;-</span> X <span class="sc">-</span> <span class="fu">rowMeans</span>(X)</span>
-<span id="cb32-4"><a></a>    X<span class="sc">/</span><span class="fu">rowSds</span>(X)</span>
-<span id="cb32-5"><a></a>}</span>
-<span id="cb32-6"><a></a><span class="fu">scale_rows</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>scale_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(X){</span>
+<span id="cb34-2"><a></a>    import<span class="sc">::</span><span class="fu">from</span>(matrixStats, rowSds)</span>
+<span id="cb34-3"><a></a>    X <span class="ot">&lt;-</span> X <span class="sc">-</span> <span class="fu">rowMeans</span>(X)</span>
+<span id="cb34-4"><a></a>    X<span class="sc">/</span><span class="fu">rowSds</span>(X)</span>
+<span id="cb34-5"><a></a>}</span>
+<span id="cb34-6"><a></a><span class="fu">scale_rows</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>Then in our script we don’t need to use <code>library(matrixStats)</code> for <code>rowSds</code> to work (it must be installed though)!</p>
@@ -704,17 +726,17 @@ NULL</code></pre>
 <h2>Custom ggplot</h2>
 <p><strong>ggplot2</strong>, like <strong>dplyr</strong> and other tidyverse packages, uses <em>non-standard evaluation</em>, that is, it refers to variable names in a data frame as if they were objects in the current environment</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y=</span> disp)) <span class="sc">+</span></span>
-<span id="cb33-2"><a></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y=</span> disp)) <span class="sc">+</span></span>
+<span id="cb35-2"><a></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To emulate this, we have to need to <strong>embrace</strong> arguments</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>ggscatter <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x, y){</span>
-<span id="cb34-2"><a></a>    import<span class="sc">::</span><span class="fu">from</span>(ggplot2, ggplot, aes, geom_point)</span>
-<span id="cb34-3"><a></a>    <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> {{ x }}, <span class="at">y =</span> {{ y }})) <span class="sc">+</span></span>
-<span id="cb34-4"><a></a>        <span class="fu">geom_point</span>()</span>
-<span id="cb34-5"><a></a>}</span>
-<span id="cb34-6"><a></a><span class="fu">ggscatter</span>(mtcars, <span class="at">x =</span> mpg, <span class="at">y =</span> disp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>ggscatter <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x, y){</span>
+<span id="cb36-2"><a></a>    import<span class="sc">::</span><span class="fu">from</span>(ggplot2, ggplot, aes, geom_point)</span>
+<span id="cb36-3"><a></a>    <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> {{ x }}, <span class="at">y =</span> {{ y }})) <span class="sc">+</span></span>
+<span id="cb36-4"><a></a>        <span class="fu">geom_point</span>()</span>
+<span id="cb36-5"><a></a>}</span>
+<span id="cb36-6"><a></a><span class="fu">ggscatter</span>(mtcars, <span class="at">x =</span> mpg, <span class="at">y =</span> disp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="externalizing-function-code" class="slide level2">
@@ -722,12 +744,12 @@ NULL</code></pre>
 <p>It is a good idea to separate function code from analysis code.</p>
 <p>Put related functions together and source as required</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">source</span>(<span class="st">"modelFunctions.R"</span>)</span>
-<span id="cb35-2"><a></a><span class="fu">source</span>(<span class="st">"plotFunctions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">source</span>(<span class="st">"modelFunctions.R"</span>)</span>
+<span id="cb37-2"><a></a><span class="fu">source</span>(<span class="st">"plotFunctions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <strong>import</strong> package enables only necessary, top-level functions to be imported to the global workspace:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>import<span class="sc">::</span><span class="fu">here</span>(poissonModel, quasiPoissonModel, <span class="at">.from =</span> <span class="st">"modelFunctions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>import<span class="sc">::</span><span class="fu">here</span>(poissonModel, quasiPoissonModel, <span class="at">.from =</span> <span class="st">"modelFunctions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In either case, <code>import::from</code> commands can be put outside the function body to make the code easier to read.</p>
 </section></section>
@@ -740,15 +762,15 @@ NULL</code></pre>
 <h2>Sanity checks</h2>
 <p>To avoid mistakes, you may want to add some basic sanity checks</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(p){</span>
-<span id="cb37-2"><a></a>    <span class="fu">stopifnot</span>(p <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> p <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
-<span id="cb37-3"><a></a>    <span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> p))</span>
-<span id="cb37-4"><a></a>}</span>
-<span id="cb37-5"><a></a><span class="fu">logit</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(p){</span>
+<span id="cb39-2"><a></a>    <span class="fu">stopifnot</span>(p <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> p <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb39-3"><a></a>    <span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> p))</span>
+<span id="cb39-4"><a></a>}</span>
+<span id="cb39-5"><a></a><span class="fu">logit</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in logit(2): p &gt; 0 &amp; p &lt; 1 is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">logit</span>(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">logit</span>(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -758,21 +780,21 @@ NULL</code></pre>
 <h2>Error messages</h2>
 <p>Often the R messages can be quite obscure</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>zap <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="cf">if</span> (<span class="fu">max</span>(x) <span class="sc">&lt;</span> <span class="fl">1e7</span>) <span class="dv">0</span> <span class="cf">else</span> x</span>
-<span id="cb41-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
-<span id="cb41-3"><a></a><span class="fu">zap</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>zap <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="cf">if</span> (<span class="fu">max</span>(x) <span class="sc">&lt;</span> <span class="fl">1e7</span>) <span class="dv">0</span> <span class="cf">else</span> x</span>
+<span id="cb43-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
+<span id="cb43-3"><a></a><span class="fu">zap</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in if (max(x) &lt; 1e+07) 0 else x: missing value where TRUE/FALSE needed</code></pre>
 </div>
 </div>
 <p>More helpful error message can be implemented using <code>stop</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>zap <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb43-2"><a></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">is.na</span>(x))) <span class="fu">stop</span>(<span class="st">"missing values in x</span><span class="sc">\n</span><span class="st">are"</span>, </span>
-<span id="cb43-3"><a></a>                            <span class="st">" not allowed"</span>)</span>
-<span id="cb43-4"><a></a>    <span class="cf">if</span> (<span class="fu">max</span>(x) <span class="sc">&lt;</span> <span class="fl">1e7</span>) <span class="dv">0</span> <span class="cf">else</span> x</span>
-<span id="cb43-5"><a></a>}</span>
-<span id="cb43-6"><a></a><span class="fu">zap</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>zap <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb45-2"><a></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">is.na</span>(x))) <span class="fu">stop</span>(<span class="st">"missing values in x</span><span class="sc">\n</span><span class="st">are"</span>, </span>
+<span id="cb45-3"><a></a>                            <span class="st">" not allowed"</span>)</span>
+<span id="cb45-4"><a></a>    <span class="cf">if</span> (<span class="fu">max</span>(x) <span class="sc">&lt;</span> <span class="fl">1e7</span>) <span class="dv">0</span> <span class="cf">else</span> x</span>
+<span id="cb45-5"><a></a>}</span>
+<span id="cb45-6"><a></a><span class="fu">zap</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in zap(x): missing values in x
 are not allowed</code></pre>
@@ -783,14 +805,14 @@ are not allowed</code></pre>
 <h2>Warning messages</h2>
 <p>Warning messages should be given using <code>warning()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>safe_log2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb45-2"><a></a>    <span class="cf">if</span> (<span class="fu">any</span>(x <span class="sc">==</span> <span class="dv">0</span>)) {</span>
-<span id="cb45-3"><a></a>        x[x <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb45-4"><a></a>        <span class="fu">warning</span>(<span class="st">"zeros replaced by 0.1"</span>)</span>
-<span id="cb45-5"><a></a>    }</span>
-<span id="cb45-6"><a></a>    <span class="fu">log</span>(x, <span class="dv">2</span>)</span>
-<span id="cb45-7"><a></a>}</span>
-<span id="cb45-8"><a></a><span class="fu">safe_log2</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>safe_log2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb47-2"><a></a>    <span class="cf">if</span> (<span class="fu">any</span>(x <span class="sc">==</span> <span class="dv">0</span>)) {</span>
+<span id="cb47-3"><a></a>        x[x <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb47-4"><a></a>        <span class="fu">warning</span>(<span class="st">"zeros replaced by 0.1"</span>)</span>
+<span id="cb47-5"><a></a>    }</span>
+<span id="cb47-6"><a></a>    <span class="fu">log</span>(x, <span class="dv">2</span>)</span>
+<span id="cb47-7"><a></a>}</span>
+<span id="cb47-8"><a></a><span class="fu">safe_log2</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -3.321928  0.000000</code></pre>
 </div>
@@ -801,11 +823,11 @@ are not allowed</code></pre>
 <h2>Suppressing warnings</h2>
 <p>If a warning is expected, you may wish to suppress it</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">log</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">log</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.098612      NaN</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">log</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">log</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>All warnings will be suppressed however!</p>
 <p>Similarly <code>suppressMessages()</code> will suppress messages.</p>
@@ -815,13 +837,13 @@ are not allowed</code></pre>
 <p>The <a href="https://purrr.tidyverse.org"><strong>purrr</strong></a> package has various functions to catch issues.</p>
 <p><code>possibly()</code> lets you modify a function to return a specified value when there is an error</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">log</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">log</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in log("a"): non-numeric argument to mathematical function</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">library</span>(purrr)</span>
-<span id="cb52-2"><a></a>poss_log <span class="ot">&lt;-</span> <span class="fu">possibly</span>(log, <span class="at">otherwise =</span> <span class="cn">NA</span>)</span>
-<span id="cb52-3"><a></a><span class="fu">poss_log</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">library</span>(purrr)</span>
+<span id="cb54-2"><a></a>poss_log <span class="ot">&lt;-</span> <span class="fu">possibly</span>(log, <span class="at">otherwise =</span> <span class="cn">NA</span>)</span>
+<span id="cb54-3"><a></a><span class="fu">poss_log</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -833,15 +855,15 @@ are not allowed</code></pre>
 <h2><code>traceback()</code></h2>
 <p>When an unexpected error occurs, there are several ways to track down the source of the error, e.g.&nbsp;<code>traceback()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f2</span>(x) }</span>
-<span id="cb54-2"><a></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ x <span class="sc">+</span> qqqq }</span>
-<span id="cb54-3"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f2</span>(x) }</span>
+<span id="cb56-2"><a></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ x <span class="sc">+</span> qqqq }</span>
+<span id="cb56-3"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in f2(x): object 'qqqq' not found</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">traceback</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">traceback</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
@@ -854,10 +876,10 @@ are not allowed</code></pre>
 <h2><code>traceback()</code> in RStudio</h2>
 <p>In RStudio, if <code>Debug &gt; On Error &gt;  Error Inspector</code> is checked and the traceback has at least 3 calls, the option to show traceback is presented</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f2</span>(x) }</span>
-<span id="cb58-2"><a></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f3</span>(x) }</span>
-<span id="cb58-3"><a></a>f3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ x <span class="sc">+</span> qqqq }</span>
-<span id="cb58-4"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f2</span>(x) }</span>
+<span id="cb60-2"><a></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">f3</span>(x) }</span>
+<span id="cb60-3"><a></a>f3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ x <span class="sc">+</span> qqqq }</span>
+<span id="cb60-4"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in f3(x): object 'qqqq' not found</code></pre>
 </div>
@@ -881,8 +903,8 @@ are not allowed</code></pre>
 <h2><code>debugonce()</code></h2>
 <p><code>debugonce()</code> flags a function for debugging the next time it is called</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">debugonce</span>(f2)</span>
-<span id="cb60-2"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">debugonce</span>(f2)</span>
+<span id="cb62-2"><a></a><span class="fu">f1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in f3(x): object 'qqqq' not found</code></pre>
 </div>
@@ -953,6 +975,7 @@ Browse[2]&gt; x
 <p>Can you think how to improve the function? See if you can modify the function to give a sensible result for any integer.</p>
 <aside class="notes">
 <p>Won’t have seen <code>apply</code> in this course yet - that’s covered in Session 4. Maybe they’ll already know it, otherwise instructor can help, or point towards ?apply</p>
+<p>Show how traceback works, and show <code>View(apply)</code> to show that’s where the call to <code>match.fun</code> occurs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -994,29 +1017,29 @@ Browse[2]&gt; x
 <h2>Documenting functions</h2>
 <p>Comments help to record what a function does</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># reorder x by grouping variable g</span></span>
-<span id="cb63-2"><a></a>groupSort <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g) {</span>
-<span id="cb63-3"><a></a>    ord <span class="ot">&lt;-</span> <span class="fu">order</span>(g) <span class="co">#indices for ascending order of g</span></span>
-<span id="cb63-4"><a></a>    x[ord]</span>
-<span id="cb63-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="co"># reorder x by grouping variable g</span></span>
+<span id="cb65-2"><a></a>groupSort <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g) {</span>
+<span id="cb65-3"><a></a>    ord <span class="ot">&lt;-</span> <span class="fu">order</span>(g) <span class="co">#indices for ascending order of g</span></span>
+<span id="cb65-4"><a></a>    x[ord]</span>
+<span id="cb65-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <strong>docstring</strong> package enables <em>roxygen</em> comments to be turned into a help file</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">library</span>(docstring)</span>
-<span id="cb64-2"><a></a>groupSort <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g) {</span>
-<span id="cb64-3"><a></a>    <span class="co">#' Reorder a Vector by a Grouping Variable</span></span>
-<span id="cb64-4"><a></a>    <span class="co">#'</span></span>
-<span id="cb64-5"><a></a>    <span class="co">#' @param x a vector</span></span>
-<span id="cb64-6"><a></a>    <span class="co">#' @param g a grouping variable</span></span>
-<span id="cb64-7"><a></a>    ord <span class="ot">&lt;-</span> <span class="fu">order</span>(g) <span class="co">#indices for ascending order of g</span></span>
-<span id="cb64-8"><a></a>    x[ord]</span>
-<span id="cb64-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="fu">library</span>(docstring)</span>
+<span id="cb66-2"><a></a>groupSort <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g) {</span>
+<span id="cb66-3"><a></a>    <span class="co">#' Reorder a Vector by a Grouping Variable</span></span>
+<span id="cb66-4"><a></a>    <span class="co">#'</span></span>
+<span id="cb66-5"><a></a>    <span class="co">#' @param x a vector</span></span>
+<span id="cb66-6"><a></a>    <span class="co">#' @param g a grouping variable</span></span>
+<span id="cb66-7"><a></a>    ord <span class="ot">&lt;-</span> <span class="fu">order</span>(g) <span class="co">#indices for ascending order of g</span></span>
+<span id="cb66-8"><a></a>    x[ord]</span>
+<span id="cb66-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="view-the-help-file-as-usual" class="slide level2">
 <h2>View the help file as usual</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>?groupSort</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a>?groupSort</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <img data-src="images/docstring_help_file.png" class="r-stretch quarto-figure-center"><p class="caption">HTML documentation generated by docstring</p><p>For fuller documentation, see the <strong>docstring</strong> vignette.</p>
@@ -1031,14 +1054,14 @@ Browse[2]&gt; x
 <p>When developing a function, we will want to validate its output.</p>
 <p>A simple approach is to try different inputs</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>log_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb66-2"><a></a>    <span class="fu">log</span>(x, <span class="dv">2</span>)</span>
-<span id="cb66-3"><a></a>}</span>
-<span id="cb66-4"><a></a><span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>log_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb68-2"><a></a>    <span class="fu">log</span>(x, <span class="dv">2</span>)</span>
+<span id="cb68-3"><a></a>}</span>
+<span id="cb68-4"><a></a><span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -1050,24 +1073,24 @@ Browse[2]&gt; x
 <p>The <strong>testthat</strong> packages allows us to create a test suite:</p>
 <p><strong>ADD LINK</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">context</span>(<span class="st">"log_2 works correctly"</span>)</span>
-<span id="cb70-2"><a></a></span>
-<span id="cb70-3"><a></a><span class="fu">test_that</span>(<span class="st">"log_2 returns log to base 2"</span>, {</span>
-<span id="cb70-4"><a></a>    <span class="fu">expect_equal</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">3</span>), <span class="dv">3</span>)</span>
-<span id="cb70-5"><a></a>    <span class="fu">expect_equal</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">0</span>), <span class="dv">0</span>)</span>
-<span id="cb70-6"><a></a>})</span>
-<span id="cb70-7"><a></a></span>
-<span id="cb70-8"><a></a><span class="fu">test_that</span>(<span class="st">"negative values give error"</span>, {</span>
-<span id="cb70-9"><a></a>    <span class="fu">expect_error</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^-</span><span class="dv">1</span>))</span>
-<span id="cb70-10"><a></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="fu">context</span>(<span class="st">"log_2 works correctly"</span>)</span>
+<span id="cb72-2"><a></a></span>
+<span id="cb72-3"><a></a><span class="fu">test_that</span>(<span class="st">"log_2 returns log to base 2"</span>, {</span>
+<span id="cb72-4"><a></a>    <span class="fu">expect_equal</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">3</span>), <span class="dv">3</span>)</span>
+<span id="cb72-5"><a></a>    <span class="fu">expect_equal</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">0</span>), <span class="dv">0</span>)</span>
+<span id="cb72-6"><a></a>})</span>
+<span id="cb72-7"><a></a></span>
+<span id="cb72-8"><a></a><span class="fu">test_that</span>(<span class="st">"negative values give error"</span>, {</span>
+<span id="cb72-9"><a></a>    <span class="fu">expect_error</span>(<span class="fu">log_2</span>(<span class="dv">2</span><span class="sc">^-</span><span class="dv">1</span>))</span>
+<span id="cb72-10"><a></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="running-tests" class="slide level2">
 <h2>Running tests</h2>
 <p>If we save the tests in a file, e.g.&nbsp;<code>tests.R</code>, we can use <code>test_file()</code> to run and check all tests:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">library</span>(testthat)</span>
-<span id="cb71-2"><a></a><span class="fu">test_file</span>(<span class="st">"tests.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">library</span>(testthat)</span>
+<span id="cb73-2"><a></a><span class="fu">test_file</span>(<span class="st">"tests.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
