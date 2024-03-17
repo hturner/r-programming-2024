@@ -120,6 +120,19 @@ x <- 1:3
 mean_and_sd(x)
 ```
 
+## Multiple return values, different types
+
+```{r}
+symmetric_sums <- function(mat) {
+  sym_mat <- mat + t(mat)
+  sum <- sum(sym_mat)
+  list(sym_mat = sym_mat, sum = sum)
+}
+mat <- matrix(1:9, 3, 3)
+symmetric_sums(mat)
+```
+
+
 ## RStudio helper
 
 RStudio has a helper to turn code into a function:
@@ -505,6 +518,8 @@ Can you think how to improve the function? See if you can modify the function to
 
 ::: {.notes}
 Won't have seen `apply` in this course yet - that's covered in Session 4. Maybe they'll already know it, otherwise instructor can help, or point towards ?apply  
+
+Show how traceback works, and show `View(apply)` to show that's where the call to `match.fun` occurs.
 :::
 
 # End matter {.inverse}

@@ -264,7 +264,7 @@ Potential to use Binder to so that people can run your code in the browser
 
 - Login or sign up for a free account at <https://www.github.com>.
 
-    - Recommend to use personal email
+    - Recommend using personal email
     - Username recommendations:
     
         - Incorporate your actual name
