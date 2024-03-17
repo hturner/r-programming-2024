@@ -435,16 +435,19 @@ NumericVector rowSumsC(NumericMatrix x) {
 ## Statistical distributions
 
 As in R, **Rcpp** provides d/p/q/r functions for the density, distribution function, quantile function and random generation.
+
 - Functions in the `Rcpp::` namespace return a vector.
 - Functions in the `R::` namespace (also provided by the **Rcpp** R package) return a scalar
 
-For example we can sample a single value from a $N(0, 1)$ distribution by extracting the first element from a vector
+For example we can sample a single value from a Gamma distribution by extracting the first element from a vector
 ```{.cpp}
-rgamma(1, 3, 1 / (y * y + 4))[0];
+Rcpp::rgamma(1, 3, 1 / (y * y + 4))[0];
 ```
+
 Or use the `R::rgamma()` function to sample a single value directly
+
 ```{.cpp}
-R::rgamma(3, 1 / (y * y + 4))
+R::rgamma(3, 1 / (y * y + 4));
 ```
 
 ## Your turn (part 1)
@@ -514,10 +517,10 @@ Benchmark your `gibbs_r()` and `gibbs_c()` functions with N = 100 and thin = 10,
 
 Rcpp provides some "syntactic sugar" to allow us to write C++ code that is more like R code.
 
-One example is operating on rows or columns of matrices. So far we have seen how to update individual elements of a `NumericMatrix`. Rcpp lets us extract an update whole rows/columns, e.g.
+One example is operating on rows or columns of matrices. So far we have seen how to update individual elements of a `NumericMatrix`. Rcpp lets us extract an update whole rows/columns, e.g. in a matrix with three columns, we can set the $i$th row with
 
 ```{Rcpp, eval = FALSE}
-mat(i, _) = NumericVector::create(x,y);
+mat(i, _) = NumericVector::create(1, 2, 3);
 ```
 
 A whole column would be extracted with `mat(_, j)`.
@@ -602,10 +605,6 @@ double approx_pi_c(const int N) {
 This function gets used in an exercise in the Rcpp packages session.  
 :::
 
-# SkillsForge password {.inverse}
-
-# End matter {.inverse}
-
 ## References
 
 :::{.smaller80}
@@ -627,6 +626,10 @@ Tsuda, M.E., _Rcpp for everyone_, <https://teuder.github.io/rcpp4everyone_en/300
   - <https://gallery.rcpp.org/articles/bayesian-time-series-changepoint/>
   - The [Rcpp Gallery](https://gallery.rcpp.org/) has all sorts of examples, many illustrating advanced features of Rcpp).
 :::
+
+# SkillsForge password {.inverse}
+
+# End matter {.inverse}
 
 ## License
 
