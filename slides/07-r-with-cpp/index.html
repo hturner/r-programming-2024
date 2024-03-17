@@ -564,7 +564,7 @@ Department of Statistics, University of Warwick
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>add_cpp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, y) 
-.Call(&lt;pointer: 0x10503c840&gt;, x, y)</code></pre>
+.Call(&lt;pointer: 0x100428840&gt;, x, y)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">add_cpp</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -900,11 +900,15 @@ Department of Statistics, University of Warwick
 </section>
 <section id="statistical-distributions" class="slide level2">
 <h2>Statistical distributions</h2>
-<p>As in R, <strong>Rcpp</strong> provides d/p/q/r functions for the density, distribution function, quantile function and random generation. - Functions in the <code>Rcpp::</code> namespace return a vector. - Functions in the <code>R::</code> namespace (also provided by the <strong>Rcpp</strong> R package) return a scalar</p>
-<p>For example we can sample a single value from a <span class="math inline">\(N(0, 1)\)</span> distribution by extracting the first element from a vector</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a></a>rgamma<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span> <span class="op">/</span> <span class="op">(</span>y <span class="op">*</span> y <span class="op">+</span> <span class="dv">4</span><span class="op">))[</span><span class="dv">0</span><span class="op">];</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As in R, <strong>Rcpp</strong> provides d/p/q/r functions for the density, distribution function, quantile function and random generation.</p>
+<ul>
+<li>Functions in the <code>Rcpp::</code> namespace return a vector.</li>
+<li>Functions in the <code>R::</code> namespace (also provided by the <strong>Rcpp</strong> R package) return a scalar</li>
+</ul>
+<p>For example we can sample a single value from a Gamma distribution by extracting the first element from a vector</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a></a>Rcpp<span class="op">::</span>rgamma<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span> <span class="op">/</span> <span class="op">(</span>y <span class="op">*</span> y <span class="op">+</span> <span class="dv">4</span><span class="op">))[</span><span class="dv">0</span><span class="op">];</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Or use the <code>R::rgamma()</code> function to sample a single value directly</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a></a>R<span class="op">::</span>rgamma<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">1</span> <span class="op">/</span> <span class="op">(</span>y <span class="op">*</span> y <span class="op">+</span> <span class="dv">4</span><span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a></a>R<span class="op">::</span>rgamma<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">1</span> <span class="op">/</span> <span class="op">(</span>y <span class="op">*</span> y <span class="op">+</span> <span class="dv">4</span><span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="your-turn-part-1" class="slide level2">
 <h2>Your turn (part 1)</h2>
@@ -944,9 +948,9 @@ Department of Statistics, University of Warwick
 <section id="rcpp-sugar-1" class="slide level2">
 <h2>Rcpp sugar</h2>
 <p>Rcpp provides some “syntactic sugar” to allow us to write C++ code that is more like R code.</p>
-<p>One example is operating on rows or columns of matrices. So far we have seen how to update individual elements of a <code>NumericMatrix</code>. Rcpp lets us extract an update whole rows/columns, e.g.</p>
+<p>One example is operating on rows or columns of matrices. So far we have seen how to update individual elements of a <code>NumericMatrix</code>. Rcpp lets us extract an update whole rows/columns, e.g.&nbsp;in a matrix with three columns, we can set the <span class="math inline">\(i\)</span>th row with</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a></a>mat<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> NumericVector<span class="op">::</span>create<span class="op">(</span>x<span class="op">,</span>y<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a></a>mat<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> NumericVector<span class="op">::</span>create<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A whole column would be extracted with <code>mat(_, j)</code>.</p>
 </section>
@@ -1020,16 +1024,6 @@ Department of Statistics, University of Warwick
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section id="skillsforge-password" class="title-slide slide level1 inverse center">
-<h1>SkillsForge password</h1>
-
-</section>
-
-<section>
-<section id="end-matter" class="title-slide slide level1 inverse center">
-<h1>End matter</h1>
-
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>
@@ -1048,6 +1042,16 @@ Department of Statistics, University of Warwick
 </ul></li>
 </ul>
 </div>
+</section></section>
+<section id="skillsforge-password" class="title-slide slide level1 inverse center">
+<h1>SkillsForge password</h1>
+
+</section>
+
+<section>
+<section id="end-matter" class="title-slide slide level1 inverse center">
+<h1>End matter</h1>
+
 </section>
 <section id="license" class="slide level2">
 <h2>License</h2>
