@@ -379,7 +379,7 @@ In R &ge 4.2.0 you get a warning but it still returns a comparison of only the f
 
 ## Vectorization and Matrices
 
-Vectorizations applies to matices too, not only through matrix algebra
+Vectorization applies to matrices too, not only through matrix algebra
 ```{r}
 M <- matrix(1:4, nrow = 2, ncol = 2)
 M + M
